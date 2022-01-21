@@ -3,6 +3,82 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Navbar from "../components/Navbar";
+import TrendingSvg from '../assets/svg/trending';
+
+
+const trending: TrendingItemProps[] = [
+  {
+    name: "SundaeSwap Labs",
+    image: "https://miro.medium.com/fit/c/40/40/1*8sy2fFc6Anumd2PscjsujQ@2x.png",
+    title: "WEN SUNDAE? Thursday!",
+    date: "Jan 15",
+    time: "4",
+  },
+  {
+    name: "Coinbase",
+    image: "https://miro.medium.com/fit/c/40/40/1*4c7_SNuureECLAy7nW8TKQ.png",
+    title: "Coinbase and Mastercard partner to revolutionize NFT purchase experience",
+    date: "Jan 18",
+    time: "2",
+  },
+  {
+    name: "Donald G. McNeil Jr.",
+    image: "https://miro.medium.com/fit/c/40/40/1*w4xWkbxe1SagK3TQkLmM5A.jpeg",
+    title: "Trump Backs Boosters. Clearly, Someone Did the Math for Him.",
+    date: "Jan 14",
+    time: "3",
+  },
+  {
+    name: "Matt Charnock in The Bold Italic",
+    image: "https://miro.medium.com/fit/c/40/40/1*tiD8iavA0UI9xLmR1mhLiA.png",
+    title: "Trump Backs Boosters. Clearly, Someone Did the Math for Him.",
+    date: "Jan 20",
+    time: "3",
+  },
+  {
+    name: "JavaScript in Plain English",
+    image: "https://miro.medium.com/fit/c/40/40/1*iETPsI-y6GMmx-AJEQRBnw@2x.png",
+    title: "5 Weird Signs of an Inexperienced Self-Taught Programmer",
+    date: "Jan 8",
+    time: "4",
+  },
+  {
+    name: "Hans van de Bruggen",
+    image: "https://miro.medium.com/fit/c/40/40/1*mDhF9X4VO0rCrJvWFatyxg.png",
+    title: "I made a prototype. Elon Musk didn’t like it. Then the internet went nuts.",
+    date: "Jan 16",
+    time: "5",
+  },
+]
+
+interface TrendingItemProps {
+  number?: any,
+  name?: any,
+  title?: any,
+  date?: any,
+  time?: any,
+  image?: any;
+}
+
+function TrendingItem({ number, name, title, date, time, image }: TrendingItemProps) {
+  return (
+    <div className="flex flex-row col-span-1">
+      <div className='w-2/12 flex flex-row justify-center'>
+        <span className="font-black text-2xl text-stone-300">{number}</span>
+      </div>
+      <div className='w-10/12 flex flex-col'>
+        <div className="flex flex-row mb-2 ">
+          <div className="h-5 w-5 object-cover">
+            <img src={image || "/placeholder.png"} className="object-cover rounded-full" alt="Comma" width={20} height={20} />
+          </div>
+          <span className='ml-2 text-xs self-center'>{name || "Nothing"}</span>
+        </div>
+        <p className="text-base font-bold text-stone-800 mb-3">{title || "No Title"}</p>
+        <small className="text-sm text-stone-500">{date || "Jan 15"} · {time} min read</small>
+      </div>
+    </div>
+  )
+}
 
 const Home: NextPage = () => {
   return (
@@ -28,6 +104,27 @@ const Home: NextPage = () => {
           <div className="absolute  -bottom-1.5 right-20">
             <Image src="/comma.png" alt="Comma" width={400} height={350} />
           </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col py-8 px-20 border border-gray-200">
+        <div className="flex flex-row mb-5">
+          <TrendingSvg />
+          <p className='uppercase text-sm self-center ml-2 text-stone-700 font-semibold '>Trending On Medium</p>
+        </div>
+        <div className="grid grid-cols-3 gap-4">
+          {
+            trending.map((value, idx) =>
+              <TrendingItem
+                number={`0${idx + 1}`}
+                name={value?.name}
+                date={value?.date}
+                time={value?.time}
+                title={value?.title}
+                image={value?.image}
+              />
+            )
+          }
         </div>
       </section>
 
