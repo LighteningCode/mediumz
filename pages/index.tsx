@@ -4,6 +4,8 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Navbar from "../components/Navbar";
 import TrendingSvg from '../assets/svg/trending';
+import MoreHorizontalSvg from '../assets/svg/more';
+import BookmarkOutline from '../assets/svg/bookmark-outline';
 
 
 const trending: TrendingItemProps[] = [
@@ -60,6 +62,15 @@ interface TrendingItemProps {
   image?: any;
 }
 
+interface ArticlePostProps{
+  authorName?: any,
+  title?: any,
+  date?: any,
+  time?: any,
+  authorImg?: any;
+  postImg?: any;
+}
+
 function TrendingItem({ number, name, title, date, time, image }: TrendingItemProps) {
   return (
     <div className="flex flex-row col-span-1">
@@ -80,6 +91,38 @@ function TrendingItem({ number, name, title, date, time, image }: TrendingItemPr
   )
 }
 
+const TextPill = ({ text }: { text: any }) => (
+  <span className="py-1.5 px-3 bg-stone-100 rounded-full text-stone-500 text-xs">{text}</span>
+)
+
+function ArticlePost({ authorName, title, date, time, authorImg}: ArticlePostProps) {
+  return (
+    <div className="w-full flex flex-row my-4">
+      <div className="w-8/12 flex flex-col justify-center">
+        <div className="flex flex-row mb-2 ">
+          <div className="h-5 w-5 object-cover">
+            <img src={false || "/placeholder.png"} className="object-cover rounded-md w-full h-full" alt="Comma" width={20} height={20} />
+          </div>
+          <span className='ml-2 text-xs self-center'>{false || "Nothing"}</span>
+        </div>
+
+        <p className="m-0 text-xl font-semibold mb-1 text-stone-800">Could AI Fix The Company “Fit” Problem?</p>
+        <p className="m-0 text-sm text-gray-500 mb-3">The end of the interview merry-go-round</p>
+
+        <div className="flex flex-row justify-between">
+          <small className="text-sm text-stone-500">{false || "Jan 15"} · {false || 0} min read · <TextPill text={"Work"} /> </small>
+          <div className="flex flex-row">
+            <BookmarkOutline className="mx-1" />
+            <MoreHorizontalSvg className="mx-1" />
+          </div>
+        </div>
+      </div>
+      <div className="w-4/12 px-5">
+        <img src={false || "/placeholder.png"} className="object-cover w-full h-36" alt="Comma" />
+      </div>
+    </div>
+  )
+}
 const Home: NextPage = () => {
   return (
     <div>
@@ -116,6 +159,7 @@ const Home: NextPage = () => {
           {
             trending.map((value, idx) =>
               <TrendingItem
+                key={idx}
                 number={`0${idx + 1}`}
                 name={value?.name}
                 date={value?.date}
@@ -128,12 +172,16 @@ const Home: NextPage = () => {
         </div>
       </section>
 
-      <main className="flex flex-row">
-        <div className="w-7/12 px-10">
-            Articels
+      <main className="flex flex-row py-10">
+        <div className="w-7/12 px-16">
+          <ArticlePost />
+          <ArticlePost />
+          <ArticlePost />
+          <ArticlePost />
+          <ArticlePost />
         </div>
         <div className="w-5/12">
-            discover what matters
+          discover what matters
         </div>
       </main>
     </div>
