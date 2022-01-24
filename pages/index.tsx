@@ -95,6 +95,10 @@ const TextPill = ({ text }: { text: any }) => (
   <span className="py-1.5 px-3 bg-stone-100 rounded-full text-stone-500 text-xs">{text}</span>
 )
 
+const TextIdea = ({ text }: { text: any }) => (
+  <span className="py-2 px-3 mx-2 my-1 border border-gray-200 rounded-sm text-stone-500 text-xs">{text}</span>
+)
+
 function ArticlePost({ authorName, title, date, time, authorImg}: ArticlePostProps) {
   return (
     <div className="w-full flex flex-row my-4">
@@ -181,7 +185,15 @@ const Home: NextPage = () => {
           <ArticlePost />
         </div>
         <div className="w-5/12">
-          discover what matters
+
+          <p className="m-0">Discover what matters</p>
+
+          <div className="flex flex-row flex-wrap w-full">
+            <TextIdea text={"Self"} />
+            <TextIdea text={"Relationships"} />
+            <TextIdea text={"Data Science"} />
+          </div>
+         
         </div>
       </main>
     </div>
