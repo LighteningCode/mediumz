@@ -78,10 +78,12 @@ interface TrendingItemProps {
 interface ArticlePostProps {
   authorName?: any,
   title?: any,
+  subTitle?: any,
   date?: any,
   time?: any,
   authorImg?: any;
   postImg?: any;
+  mainTopic?: any;
 }
 
 function TrendingItem({ number, name, title, date, time, image }: TrendingItemProps) {
@@ -112,22 +114,22 @@ const TextIdea = ({ text }: { text: any }) => (
   <span style={{ fontSize: "13px" }} className="py-2 px-3 mr-2 my-1 border border-gray-200 rounded-sm text-stone-500">{text}</span>
 )
 
-function ArticlePost({ authorName, title, date, time, authorImg }: ArticlePostProps) {
+function ArticlePost({ authorName, title, date, time, authorImg, subTitle, mainTopic, postImg }: ArticlePostProps) {
   return (
     <div className="w-full flex flex-row my-4">
       <div className="w-8/12 flex flex-col justify-center">
         <div className="flex flex-row mb-2 ">
           <div className="h-5 w-5 object-cover">
-            <img src={false || "/placeholder.png"} className="object-cover rounded-md w-full h-full" alt="Comma" width={20} height={20} />
+            <img src={authorImg || "/placeholder.png"} className="object-cover rounded-md w-full h-full" alt="Comma" width={20} height={20} />
           </div>
-          <span className='ml-2 text-xs self-center'>{false || "Nothing"}</span>
+          <span className='ml-2 text-xs self-center'>{authorName || "Nothing"}</span>
         </div>
 
-        <p className="m-0 text-xl font-semibold mb-1 text-stone-800">Could AI Fix The Company “Fit” Problem?</p>
-        <p className="m-0 text-sm text-gray-500 mb-3">The end of the interview merry-go-round</p>
+        <p className="m-0 text-xl font-semibold mb-1 text-stone-800">{title || "No Title"}</p>
+        <p className="m-0 text-sm text-gray-500 mb-3">{subTitle || " "}</p>
 
         <div className="flex flex-row justify-between">
-          <small className="text-sm text-stone-500">{false || "Jan 15"} · {false || 0} min read · <TextPill text={"Work"} /> </small>
+          <small className="text-sm text-stone-500">{date || "No Date"} · {time || 0} min read {mainTopic && <> · <TextPill text={mainTopic} /> </>}  </small>
           <div className="flex flex-row">
             <BookmarkOutline className="mx-1" />
             <MoreHorizontalSvg className="mx-1" />
@@ -135,7 +137,7 @@ function ArticlePost({ authorName, title, date, time, authorImg }: ArticlePostPr
         </div>
       </div>
       <div className="w-4/12 px-5">
-        <img src={false || "/placeholder.png"} className="object-cover w-full h-36" alt="Comma" />
+        <img src={postImg || "/placeholder.png"} className="object-cover w-full h-36" alt="Comma" />
       </div>
     </div>
   )
