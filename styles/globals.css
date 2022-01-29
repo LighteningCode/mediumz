@@ -3,16 +3,23 @@
 @tailwind utilities;
 
 
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+
+@layer components {
+  .textidea {
+    @apply py-2 px-3 mr-2 my-1 border cursor-pointer border-gray-200 rounded-sm text-stone-500
+  }
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'EB Garamond', serif;
 }
 
-body {
+body, p {
   padding: 0;
   margin: 0;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
