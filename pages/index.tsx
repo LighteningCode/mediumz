@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import Navbar from "../components/Navbar";
 import TrendingSvg from '../assets/svg/trending';
 import MoreHorizontalSvg from '../assets/svg/more';
@@ -111,7 +110,7 @@ const TextPill = ({ text }: { text: any }) => (
 )
 
 const TextIdea = ({ text }: { text: any }) => (
-  <span style={{ fontSize: "13px" }} className="py-2 px-3 mr-2 my-1 border border-gray-200 rounded-sm text-stone-500">{text}</span>
+  <span style={{ fontSize: "13px" }} className="textidea">{text}</span>
 )
 
 function ArticlePost({ authorName, title, date, time, authorImg, subTitle, mainTopic, postImg }: ArticlePostProps) {
@@ -221,9 +220,9 @@ const Home: NextPage = () => {
 
             <div className="flex flex-row flex-wrap w-full pr-6">
               {
-                LINKS.map((value) =>
-                  <Link href={value.href}>
-                    <p className="text-stone-500 text-sm mr-4 mb-3 font-normal">{value.label}</p>
+                LINKS.map((value, indx) =>
+                  <Link key={indx} href={value.href}>
+                    <p className="text-stone-500 text-sm mr-4 mb-3 font-normal cursor-pointer hover:text-stone-700">{value.label}</p>
                   </Link>
                 )
               }
