@@ -17,6 +17,17 @@ const Writer = ({ image, name, link }: any) => {
     )
 }
 
+const FooterLink = ({ to, label }: { to: any, label: any; }) => {
+    return (
+        <Link href={to || "#"}>
+            <span className="text-xs underline px-6 text-stone-700">
+                {label}
+            </span>
+        </Link>
+    )
+}
+
+
 
 const About: NextPage = () => {
     return (
@@ -27,10 +38,10 @@ const About: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Navbar />
+            <Navbar className="fixed top-0 left-0 w-full z-50"  />
 
 
-            <section className="flex flex-col py-24 px-20 border-b border-stone-800">
+            <section className="flex flex-col pt-44 py-24 px-20 border-b border-stone-800">
                 <h1 className="text-8xl font-medium tracking-tight  text-center">Every idea needs <span className="font-bold">Mediumz.</span> </h1>
             </section>
 
@@ -101,12 +112,52 @@ const About: NextPage = () => {
                         <h3 className="text-8xl mb-24">Take Medium with you.</h3>
                         <p className="font-medium my-8 text-md leading-6 self-center mb-10 pr-48">Download our app so you can read, write, and publish wherever you are.</p>
                         <div className="flex flex-row">
-                            <a href="https://apps.apple.com/us/app/medium/id828256236" target="_blank" className="mr-10"><img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/AppleStore_2x.png" width="167" alt=""/></a>
-                            <a href="https://play.google.com/store/apps/details?id=com.medium.reader&amp;hl=en_US" target="_blank" className="w-inline-block"><img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/PlayStore_2x.png" width="167" alt=""/></a>
+                            <a href="https://apps.apple.com/us/app/medium/id828256236" target="_blank" className="mr-10"><img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/AppleStore_2x.png" width="167" alt="" /></a>
+                            <a href="https://play.google.com/store/apps/details?id=com.medium.reader&amp;hl=en_US" target="_blank" className="w-inline-block"><img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/PlayStore_2x.png" width="167" alt="" /></a>
                         </div>
                     </div>
                     <div className="w-1/2 flex flex-row justify-center">
                         <img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen.png" srcSet="https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen-p-500.png 500w, https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen.png 668w" sizes="(max-width: 479px) 85vw, (max-width: 767px) 44vw, 334px" width="334" alt="" />
+                    </div>
+                </div>
+                <div className="flex flex-row  border-black border-t">
+                    <div className="w-1/2 px-7 py-5 border-r border-black">
+                        <h3 className="text-8xl mb-24">Learn more about us. Or join us.</h3>
+                    </div>
+                    <div className="w-1/2 flex flex-col  justify-center">
+                        <div className="p-10">
+                            <h4 className="text-4xl">The Medium blog</h4>
+                            <p className="font-medium mt-2 mb-40 text-lg leading-6 self-center pr-36">Visit our company blog for the latest news, product updates, and tips and tricks.</p>
+
+                            <button className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-150  border w-56 text-xl self-center rounded-full px-3 py-2">Read our Blog</button>
+                        </div>
+                        <hr className="border-t border-black" />
+                        <div className="p-10">
+                            <h4 className="text-4xl">Work at Medium</h4>
+                            <p className="font-medium mt-2 text-lg leading-6 self-center mb-40 pr-36">Our team is home to engineers, journalists, artists, and creatives of all stripes.</p>
+                            <button className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-150  border w-56 text-xl self-center rounded-full px-3 py-2">View open positions</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex flex-row  border-black border-t">
+                    <div className="w-1/2 px-7 py-5 border-r border-black">
+                        <iframe src="https://player.vimeo.com/video/448735219?api=1&amp;background=1&amp;mute=1&amp;loop=1" width="100%" height="100%" frameBorder="0" allow="autoplay; fullscreen"></iframe>
+                    </div>
+                    <div className="w-1/2 flex flex-col p-10">
+                        <h3 className="text-8xl mb-24">Read, write, and expand your world.</h3>
+                        <button className="bg-green-500 text-white hover:bg-green-800 hover:text-white transition-all duration-150  border w-44 text-xl rounded-full px-7 py-1">Get Started</button>
+                    </div>
+                </div>
+
+                <div className="flex flex-col justify-center  py-7 border-black border-t">
+                    <div className="self-center mb-5">
+                    <h2 className="text-3xl font-bold">Mediumz</h2>
+                    </div>
+                    <div className="flex self-center flex-row">
+                        <FooterLink to={"#"} label="Terms" />
+                        <FooterLink to={"#"} label="Privacy" />
+                        <FooterLink to={"#"} label="Help" />
                     </div>
                 </div>
 
