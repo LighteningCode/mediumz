@@ -22,7 +22,7 @@ const About: NextPage = () => {
     return (
         <div>
             <Head>
-                <title>Mediumz - Where copying finds you</title>
+                <title>What is Mediumz?</title>
                 <meta name="description" content="This is a copy/clone of Medium, please dont sue :'(" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
@@ -30,7 +30,7 @@ const About: NextPage = () => {
             <Navbar />
 
 
-            <section className="flex flex-col py-24 px-20 border border-stone-800">
+            <section className="flex flex-col py-24 px-20 border-b border-stone-800">
                 <h1 className="text-8xl font-medium tracking-tight  text-center">Every idea needs <span className="font-bold">Mediumz.</span> </h1>
             </section>
 
@@ -74,6 +74,40 @@ const About: NextPage = () => {
                     </div>
 
                     <button className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-150  border w-56 text-xl self-center rounded-full px-3 py-2">Write on Mediumz</button>
+                </div>
+
+                <div className="flex flex-col bg-green-500 border-b border-black pt-10">
+                    <div className=" pt-14 pb-5 flex flex-col ">
+                        <h1 className="text-8xl font-medium tracking-tight text-center px-44">Get more with membership.</h1>
+                        <p className="font-medium my-8 text-lg leading-6 px-96 self-center text-center">Become a Medium member to enjoy unlimited access for 3 bananas/month and directly support the writers you read most.</p>
+                    </div>
+                    <button className="border-white text-white hover:bg-white hover:text-gray-800 transition-all duration-150  border w-64 text-xl self-center rounded-full px-3 py-2 mb-16">See membership options</button>
+
+                    <div className="flex flex-row font-medium border-t border-black">
+                        <div className="border-black border-r w-1/2 py-10 px-10">
+                            <h1 className="text-5xl font-medium tracking-tight mb-10">Read as much as you want.</h1>
+                            <img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/UnlimitedReading.svg" width="260" height="135" alt=""></img>
+                            <p className="font-medium my-8 text-md leading-6 self-center">Enjoy unlimited access to every story across all of your devices.</p>
+                        </div>
+                        <div className="border-stone-800 w-1/2 py-10 px-10">
+                            <h1 className="text-5xl font-medium tracking-tight mb-10">Reward quality content.</h1>
+                            <img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/SupportWriters.svg" width="250" height="135" alt=""></img>
+                            <p className="font-medium my-8 text-md leading-6 self-center">Your membership helps us pay writers, and keeps your experience ad-free.</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex flex-row bg-green-200  border-black pt-10">
+                    <div className="w-1/2 px-7">
+                        <h3 className="text-8xl mb-24">Take Medium with you.</h3>
+                        <p className="font-medium my-8 text-md leading-6 self-center mb-10 pr-48">Download our app so you can read, write, and publish wherever you are.</p>
+                        <div className="flex flex-row">
+                            <a href="https://apps.apple.com/us/app/medium/id828256236" target="_blank" className="mr-10"><img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/AppleStore_2x.png" width="167" alt=""/></a>
+                            <a href="https://play.google.com/store/apps/details?id=com.medium.reader&amp;hl=en_US" target="_blank" className="w-inline-block"><img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/PlayStore_2x.png" width="167" alt=""/></a>
+                        </div>
+                    </div>
+                    <div className="w-1/2 flex flex-row justify-center">
+                        <img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen.png" srcSet="https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen-p-500.png 500w, https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen.png 668w" sizes="(max-width: 479px) 85vw, (max-width: 767px) 44vw, 334px" width="334" alt="" />
+                    </div>
                 </div>
 
 
