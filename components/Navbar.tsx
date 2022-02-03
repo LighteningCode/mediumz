@@ -10,7 +10,7 @@ export default function Navbar(props: any) {
      <div className="pr-20 self-center flex flex-row">
        <ul className="flex flex-row justify-between">
          <li className="mx-3 font-thin self-center text-sm"><a href="/about">Our story</a></li>
-         <li className="mx-3 font-thin self-center text-sm"><a href="#">Membership</a></li>
+         <li className="mx-3 font-thin self-center text-sm"><a href="/membership">Membership</a></li>
          <li className="mx-3 font-thin self-center text-sm"><a href="#">Write</a></li>
          <li className="mx-3 font-thin self-center text-sm"><a href="#">Sign In</a></li>
        </ul>
