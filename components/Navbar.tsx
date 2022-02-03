@@ -2,7 +2,7 @@
 
 export default function Navbar(props: any) {
   return (
-   <nav className="flex flex-row justify-between py-5 border-b border-black">
+   <nav className={`flex flex-row justify-between py-5 border-b bg-white border-black ${props.className ? props.className : ""}`}>
      <div className="flex flex-row pl-20">
        <h2 className="text-3xl font-bold">Mediumz</h2>
      </div>
