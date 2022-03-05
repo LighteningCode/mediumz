@@ -1,21 +1,23 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import Navbar from "../components/Navbar";
 import TrendingSvg from '../assets/svg/trending';
 import MoreHorizontalSvg from '../assets/svg/more';
 import BookmarkOutline from '../assets/svg/bookmark-outline';
 import Link from 'next/link';
 
-const Writer = ({ image, name, link }: any) => {
+const Writer = ({ image, name, link, index, portfolio }: any) => {
     return (
-        <div className="flex flex-row h-full w-full border-stone-800 border-y py-5">
-            <img src={image || "/placeholder.png"} className="object-cover rounded-full" alt="Comma" width={30} height={30} />
-            <span className="ml-5">{name || "No Writer"}</span>
+        <div className={`flex flex-row h-26 w-full mx-4 border-stone-800 ${ [0,1,2].includes(index) ? "border-y" : "border-b"} py-2`}>
+            <img src={image || "/placeholder.png"} className="object-cover rounded-full h-12 w-12" alt="Comma" width={30} height={30} />
+            <div className="flex flex-col justify-center">
+                <span className="ml-5 text-xl capitalize">{name || "No Name"}</span>
+                <span className="ml-5 text-lg font-light uppercase">{portfolio || "No Portfolio"}</span>
+            </div>
         </div>
     )
 }
+
 
 const FooterLink = ({ to, label }: { to: any, label: any; }) => {
     return (
@@ -56,15 +58,15 @@ const About: NextPage = () => {
                     </div>
                 </div>
 
-                <div>
+                <div className="bg-orange-200">
                     <div className="border-t border-stone-800 pt-14 pb-10 flex flex-col ">
                         <h1 className="text-8xl font-medium tracking-tight text-center px-44">A living network of copying minds.</h1>
                         <p className="font-medium my-8 text-lg leading-6 px-96 self-center text-center">Anyone can copy & write on Medium. Thought-leaders, journalists, experts, and individuals with unique perspectives share their thinking here. You’ll find pieces by independent writers from around the globe, stories we feature and leading authors, and smart takes on our own suite of blogs and publications.</p>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-2 my-0">
-                        {[0, 0, 0, 0, 0, 0, 0, 0, 0].map((value, idx) =>
-                            <Writer />
+                    <div className="grid grid-cols-3 gap-2 my-7">
+                        {[0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0].map((value, idx) =>
+                            <Writer index={idx} />
                         )
                         }
                     </div>
