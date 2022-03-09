@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from '../components/Footer';
 import { Transition } from '@headlessui/react'
 import { Icon } from '@iconify/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Members = [
   {
@@ -31,6 +31,32 @@ function className(values: any) {
 const Membership: NextPage = () => {
 
   const [selectedMemeber, setSelectedMemeber] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      nextMember()
+    }, 5000);
+  }, [selectedMemeber]);
+
+  const nextMember = () => {
+    if (Members.length === selectedMemeber + 1) {
+      setSelectedMemeber(0)
+    } else {
+      setSelectedMemeber(value => value + 1)
+    }
+  }
+
+  const prevMember = () => {
+    if (selectedMemeber === 0) {
+      setSelectedMemeber(Members.length - 1)
+    } else {
+      setSelectedMemeber(value => value - 1)
+    }
+  }
+
+  useEffect(() => {
+    console.log("Selected member", selectedMemeber)
+  }, [selectedMemeber]);
 
   return (
     <div>
@@ -69,53 +95,62 @@ const Membership: NextPage = () => {
 
         </div>
 
-        <div className="flex flex-col pt-20 pb-14">
+        <div style={{ height: "400px" }} className="flex flex-col pt-20 pb-14 relative">
           <h3 className="text-center text-5xl mb-7">Why I'm a Medium Member...</h3>
 
 
-          <div className="flex flex-row justify-center mt-10">
+          <div style={{ height: "300px" }} className="absolute mt-8">
             {
               Members.map((value, idx) =>
-                idx === selectedMemeber &&
-                <>
+                <Transition show={idx === selectedMemeber} className="w-full h-full flex flex-row justify-center pt-10">
                   <div className="w-1/2 flex flex-row justify-end">
-                    <Transition show={idx === selectedMemeber}
-                      enter={"transition-opacity duration-200"}
-                      leave={"transition-opacity duration-200"}
-                      enterFrom="opacity-0"
-                      enterTo='opacity-100'
-                      leaveFrom='opacity-100'
-                      leaveTo='opacity-0'
-                      className="flex flex-row justify-center mt-10">
-                      <img src={value?.imageUrl} className="mr-10" alt="testimony" />
-                    </Transition>
+                    <Transition.Child
+                      enter={" transition-all ease-in-out duration-500"}
+                      leave={" transition-all ease-in-out duration-500"}
+                      enterFrom="opacity-0 -translate-x-20 "
+                      enterTo='opacity-100 translate-x-0'
+                      leaveFrom='opacity-100 translate-x-0'
+                      leaveTo='opacity-0 translate-x-20'
+                      className="flex flex-row justify-center"
+                    >
+                      <img src={value?.imageUrl} className="mr-10 self-center" alt="testimony" />
+                    </Transition.Child>
                   </div>
-                  <div className="w-1/2">
-                    <Transition
-                      enter={"transition-opacity duration-200"}
-                      leave={"transition-opacity duration-200"}
+                  <div className="w-1/2 h-full">
+                    <Transition.Child
+                      enter={"transition-opacity duration-500 delay-200"}
+                      leave={"transition-opacity duration-500 delay-200"}
                       enterFrom="opacity-0"
                       enterTo='opacity-100'
                       leaveFrom='opacity-100'
                       leaveTo='opacity-0'
-                      show={idx === selectedMemeber}>
-                      <p className="text-xl font-medium">{value?.comment}</p>
+                    >
+                      <p className="text-xl font-medium mr-24">{value?.comment}</p>
                       <h5 className="text-2xl mt-5">{value?.name}</h5>
-                    </Transition>
-                    <div className="flex-row flex w-24 justify-between">
-                      <button onClick={() => setSelectedMemeber(value => value - 1)}>
-                      <Icon icon="ic:baseline-arrow-back" fontSize={40} />
+                    </Transition.Child>
+                    <div className="flex-row flex w-16 mt-8 justify-between">
+
+                      <button onClick={() => prevMember()}>
+                        {
+                          selectedMemeber !== 0 &&
+                          <img src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-left.svg" loading="lazy" alt="" />
+                        }
                       </button>
-                      <button onClick={() => setSelectedMemeber(value => value + 1)}>
-                      <Icon icon="ic:baseline-arrow-forward" fontSize={40} />
+
+
+                      <button onClick={() => nextMember()}>
+                        {
+                          selectedMemeber !== Members.length - 1 &&
+                          <img src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-right.svg" loading="lazy" alt="" />
+                        }
                       </button>
-                      
+
+
                     </div>
                   </div>
-                </>
+                </Transition>
               )
             }
-
           </div>
 
         </div>
