@@ -3,6 +3,8 @@ import Head from 'next/head'
 import Navbar from "../components/Navbar";
 import Footer from '../components/Footer';
 import { useState } from 'react';
+import { Transition } from '@headlessui/react';
+import { Icon } from '@iconify/react';
 
 const faqdata = [
     {
@@ -53,16 +55,25 @@ const Question = ({ image, question, answer, link, index, portfolio }: any) => {
     const [show, setShow] = useState(false);
 
     return (
-        <div onClick={() => setShow(!show)} className="flex flex-col transition-all py-5  cursor-pointer border-white border-b">
+        <div onClick={() => setShow(!show)} className="group flex flex-col transition-all py-5  cursor-pointer border-white border-b">
             <div className={`flex flex-row h-26 w-full  text-white px-20 mb-8 `}>
-                <p className="font-medium  text-xl leading-6 self-center hover:underline">{question || "Default Question"}</p>
+                <p className="font-medium group-hover:underline text-xl leading-6 self-center mr-auto">{question || "Default Question"}</p>
+                <Icon icon="bi:arrow-down" fontSize={25} rotate={show ? 2 : 0} />
             </div>
 
             {
                 show &&
-                <div className="px-20 ">
+                <Transition
+                    show={show}
+                    enter={"transition-opacity duration-500 delay-200"}
+                    leave={"transition-opacity duration-500 delay-200"}
+                    enterFrom="opacity-0"
+                    enterTo='opacity-100'
+                    leaveFrom='opacity-100'
+                    leaveTo='opacity-0'
+                    className="px-20">
                     <p className="font-medium mb-4 text-base leading-6 self-center"> {answer || "No answer"}</p>
-                </div>
+                </Transition>
             }
 
         </div>
@@ -185,7 +196,7 @@ const Creators: NextPage = () => {
                     <img src="/cubes.png" alt="" className="absolute top-0 z-0 left-0"></img>
                 </div>
 
-                <div className="flex flex-col bg-black text-white relative border-black">
+                <div className="flex flex-col bg-black text-white relative border-black transition-all">
                     <h1 className="text-5xl px-10 font-medium tracking-tight mb-28 mt-8">More about writing on Medium:</h1>
 
                     {faqdata.map((value, idx) =>
