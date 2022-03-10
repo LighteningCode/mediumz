@@ -1,14 +1,13 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Navbar from "../components/Navbar";
-import TrendingSvg from '../assets/svg/trending';
-import MoreHorizontalSvg from '../assets/svg/more';
-import BookmarkOutline from '../assets/svg/bookmark-outline';
+import { Transition } from '@headlessui/react'
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const Writer = ({ image, name, link, index, portfolio }: any) => {
     return (
-        <div className={`flex flex-row h-26 w-full mx-4 border-stone-800 ${ [0,1,2].includes(index) ? "border-y" : "border-b"} py-2`}>
+        <div className={`flex flex-row h-26 w-full mx-4 border-stone-800 ${[0, 1, 2].includes(index) ? "border-y" : "border-b"} py-2`}>
             <img src={image || "/placeholder.png"} className="object-cover rounded-full h-12 w-12" alt="Comma" width={30} height={30} />
             <div className="flex flex-col justify-center">
                 <span className="ml-5 text-xl capitalize">{name || "No Name"}</span>
@@ -17,7 +16,6 @@ const Writer = ({ image, name, link, index, portfolio }: any) => {
         </div>
     )
 }
-
 
 const FooterLink = ({ to, label }: { to: any, label: any; }) => {
     return (
@@ -30,8 +28,57 @@ const FooterLink = ({ to, label }: { to: any, label: any; }) => {
 }
 
 
+const Members = [
+    {
+        name: "Joel Leon",
+        comment: "Medium is trying to shift the paradigm. They’re catering to those looking for fresh, new, authentic voices. I believe wholeheartedly in their mission.",
+        imageUrl: "./about_1.png"
+    },
+    {
+        name: "Jackie Colburn",
+        comment: "Medium is a great place to read and learn from a wide range of authors. It’s not muddied up by ads. It feels like one of the few pure places to go online.",
+        imageUrl: "./about_2.png"
+    },
+    {
+        name: "Jasmine Bina",
+        comment: "There’s no other place that combines such an excellent level of writing with a truly engaged and active community. Medium is truly where ideas are born, shared, and spread.",
+        imageUrl: "./about_3.png"
+    },
+]
+
+
 
 const About: NextPage = () => {
+
+
+    const [selectedMemeber, setSelectedMemeber] = useState(0);
+
+    useEffect(() => {
+        setTimeout(() => {
+            nextMember()
+        }, 5000);
+    }, [selectedMemeber]);
+
+    const nextMember = () => {
+        if (Members.length === selectedMemeber + 1) {
+            setSelectedMemeber(0)
+        } else {
+            setSelectedMemeber(value => value + 1)
+        }
+    }
+
+    const prevMember = () => {
+        if (selectedMemeber === 0) {
+            setSelectedMemeber(Members.length - 1)
+        } else {
+            setSelectedMemeber(value => value - 1)
+        }
+    }
+
+    useEffect(() => {
+        console.log("Selected member", selectedMemeber)
+    }, [selectedMemeber]);
+
     return (
         <div>
             <Head>
@@ -40,7 +87,7 @@ const About: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Navbar className="fixed top-0 left-0 w-full z-50"  />
+            <Navbar className="fixed top-0 left-0 w-full z-50" />
 
 
             <section className="flex flex-col pt-44 py-24 px-20 border-b border-stone-800">
@@ -65,20 +112,67 @@ const About: NextPage = () => {
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 my-7">
-                        {[0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0].map((value, idx) =>
+                        {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((value, idx) =>
                             <Writer index={idx} />
                         )
                         }
                     </div>
                 </div>
 
-                <div className="flex flex-col text-white bg-black py-10">
-                    <div className="flex flex-row font-medium ">
+                <div className="flex flex-col text-white bg-black relative z-0">
+                    <div className="flex flex-row font-medium">
                         <div className="border-white border-r w-1/2 py-10 px-10">
-                            <h1 className="text-8xl font-medium tracking-tight pr-36">Over 100 million readers and growing.</h1>
+                            <h1 className="text-8xl font-medium tracking-tight pr-28 mb-10">Over 100 million readers and growing.</h1>
                         </div>
-                        <div className="border-stone-800 w-1/2">
-
+                        <div className="border-stone-800 w-1/2 relative">
+                            {
+                                Members.map((value, idx) =>
+                                    <div style={{ zIndex: 0 }} className="absolute top-3 h-full ml-8">
+                                        <Transition key={idx} show={idx === selectedMemeber} className="w-full h-full flex flex-col justify-center">
+                                            <div className="w-1/2 flex flex-row justify-end mt-16">
+                                                <Transition.Child
+                                                    enter={" transition-all ease-in-out duration-500"}
+                                                    leave={" transition-all ease-in-out duration-500"}
+                                                    enterFrom="opacity-0 "
+                                                    enterTo='opacity-100 '
+                                                    leaveFrom='opacity-100 '
+                                                    leaveTo='opacity-0 '
+                                                    className="flex flex-row justify-center"
+                                                >
+                                                    <img src={value?.imageUrl} className="mr-10 self-center" alt="testimony" />
+                                                </Transition.Child>
+                                            </div>
+                                            <div className=" h-full pr-28">
+                                                <Transition.Child
+                                                    enter={"transition-opacity duration-500 delay-200"}
+                                                    leave={"transition-opacity duration-500 delay-200"}
+                                                    enterFrom="opacity-0"
+                                                    enterTo='opacity-100'
+                                                    leaveFrom='opacity-100'
+                                                    leaveTo='opacity-0'
+                                                >
+                                                    <p className="text-2xl font-medium mt-10">"{value?.comment}"</p>
+                                                    <h5 className="text-2xl mt-5">{value?.name}</h5>
+                                                </Transition.Child>
+                                                <div className="flex-row flex w-16 mt-8 justify-between">
+                                                    <button onClick={() => prevMember()}>
+                                                        {
+                                                            selectedMemeber !== 0 &&
+                                                            <img src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-left.svg" loading="lazy" alt="" />
+                                                        }
+                                                    </button>
+                                                    <button onClick={() => nextMember()}>
+                                                        {
+                                                            selectedMemeber !== Members.length - 1 &&
+                                                            <img src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-right.svg" loading="lazy" alt="" />
+                                                        }
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </Transition>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                     <div className="border-t border-white pt-14 pb-5 flex flex-col ">
@@ -89,7 +183,7 @@ const About: NextPage = () => {
                     <button className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-150  border w-56 text-xl self-center rounded-full px-3 py-2">Write on Mediumz</button>
                 </div>
 
-                <div className="flex flex-col bg-green-500 border-b border-black pt-10">
+                <div className="flex relative flex-col z-50 bg-green-500 border-b border-black pt-10">
                     <div className=" pt-14 pb-5 flex flex-col ">
                         <h1 className="text-8xl font-medium tracking-tight text-center px-44">Get more with membership.</h1>
                         <p className="font-medium my-8 text-lg leading-6 px-96 self-center text-center">Become a Medium member to enjoy unlimited access for 3 bananas/month and directly support the writers you read most.</p>
@@ -154,7 +248,7 @@ const About: NextPage = () => {
 
                 <div className="flex flex-col justify-center  py-7 border-black border-t">
                     <div className="self-center mb-5">
-                    <h2 className="text-3xl font-bold">Mediumz</h2>
+                        <h2 className="text-3xl font-bold">Mediumz</h2>
                     </div>
                     <div className="flex self-center flex-row">
                         <FooterLink to={"#"} label="Terms" />
