@@ -98,7 +98,7 @@ const Membership: NextPage = () => {
           <div style={{ height: "300px" }} className="absolute mt-8">
             {
               Members.map((value, idx) =>
-                <Transition show={idx === selectedMemeber} className="w-full h-full flex flex-row justify-start pt-16">
+                <Transition show={idx === selectedMemeber} key={idx} className="w-full h-full flex flex-row justify-start pt-16">
                   <div className="w-1/2 flex flex-row justify-end">
                     <Transition.Child
                       enter={" transition-all ease-in-out duration-500"}
@@ -121,7 +121,7 @@ const Membership: NextPage = () => {
                       leaveFrom='opacity-100'
                       leaveTo='opacity-0'
                     >
-                      <p className="text-xl font-medium mr-24">"{value?.comment}"</p>
+                      <p className="text-xl font-medium mr-24">&quot;{value?.comment}&quot;</p>
                       <h5 className="text-2xl mt-5">{value?.name}</h5>
                     </Transition.Child>
                     <div className="flex-row flex w-16 mt-8 justify-between">

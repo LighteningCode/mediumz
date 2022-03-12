@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 
 export default function Navbar(props: any) {
@@ -9,10 +10,10 @@ export default function Navbar(props: any) {
 
      <div className="pr-20 self-center flex flex-row">
        <ul className="flex flex-row justify-between">
-         <li className="mx-3 font-thin self-center text-sm"><a href="/about">Our story</a></li>
-         <li className="mx-3 font-thin self-center text-sm"><a href="/membership">Membership</a></li>
-         <li className="mx-3 font-thin self-center text-sm"><a href="/creators">Write</a></li>
-         <li className="mx-3 font-thin self-center text-sm"><a href="/signin">Sign In</a></li>
+         <li className="mx-3 font-thin self-center text-sm"><Link href="/about">Our story</Link></li>
+         <li className="mx-3 font-thin self-center text-sm"><Link href="/membership">Membership</Link></li>
+         <li className="mx-3 font-thin self-center text-sm"><Link href="/creators">Write</Link></li>
+         <li className="mx-3 font-thin self-center text-sm"><Link href="/signin">Sign In</Link></li>
        </ul>
        <span className="px-4 py-2 bg-stone-900 cursor-pointer hover:bg-black rounded-full text-sm font-thin ml-5 text-white">Get Started</span>
      </div>

@@ -1,14 +1,15 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Image from 'next/image'
 import Navbar from "../components/Navbar";
 import { Transition } from '@headlessui/react'
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const Writer = ({ image, name, link, index, portfolio }: any) => {
     return (
         <div className={`flex flex-row h-26 w-full mx-4 border-stone-800 ${[0, 1, 2].includes(index) ? "border-y" : "border-b"} py-2`}>
-            <img src={image || "/placeholder.png"} className="object-cover rounded-full h-12 w-12" alt="Comma" width={30} height={30} />
+            <Image src={image || "/placeholder.png"} className="object-cover rounded-full h-12 w-12" alt="Comma" width={30} height={30} />
             <div className="flex flex-col justify-center">
                 <span className="ml-5 text-xl capitalize">{name || "No Name"}</span>
                 <span className="ml-5 text-lg font-light uppercase">{portfolio || "No Portfolio"}</span>
@@ -19,7 +20,7 @@ const Writer = ({ image, name, link, index, portfolio }: any) => {
 
 const FooterLink = ({ to, label }: { to: any, label: any; }) => {
     return (
-        <Link href={to || "#"}>
+        <Link href={to || "#"} passHref>
             <span className="text-xs underline px-6 text-stone-700">
                 {label}
             </span>
@@ -59,21 +60,27 @@ const About: NextPage = () => {
         }, 5000);
     }, [selectedMemeber]);
 
-    const nextMember = () => {
-        if (Members.length === selectedMemeber + 1) {
-            setSelectedMemeber(0)
-        } else {
-            setSelectedMemeber(value => value + 1)
-        }
-    }
+        const nextMember = useCallback(
+            () => {
+                if (Members.length === selectedMemeber + 1) {
+                    setSelectedMemeber(0)
+                } else {
+                    setSelectedMemeber(value => value + 1)
+                }
+            },
+            [selectedMemeber, Members],
+        );
 
-    const prevMember = () => {
-        if (selectedMemeber === 0) {
-            setSelectedMemeber(Members.length - 1)
-        } else {
-            setSelectedMemeber(value => value - 1)
-        }
-    }
+        const prevMember = useCallback(
+            () => {
+                if (selectedMemeber === 0) {
+                    setSelectedMemeber(Members.length - 1)
+                } else {
+                    setSelectedMemeber(value => value - 1)
+                }
+            },
+            [selectedMemeber, Members],
+        );
 
     useEffect(() => {
         console.log("Selected member", selectedMemeber)
@@ -113,7 +120,7 @@ const About: NextPage = () => {
 
                     <div className="grid grid-cols-3 gap-2 my-7">
                         {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((value, idx) =>
-                            <Writer index={idx} />
+                            <Writer key={idx} index={idx} />
                         )
                         }
                     </div>
@@ -127,25 +134,25 @@ const About: NextPage = () => {
                         <div className="border-stone-800 w-1/2 relative">
                             {
                                 Members.map((value, idx) =>
-                                    <div style={{ zIndex: 0 }} className="absolute top-3 h-full ml-8">
+                                    <div style={{ zIndex: 0 }} key={idx} className="absolute top-3 h-full ml-8">
                                         <Transition key={idx} show={idx === selectedMemeber} className="w-full h-full flex flex-col justify-center">
                                             <div className="w-1/2 flex flex-row justify-end mt-16">
                                                 <Transition.Child
-                                                    enter={" transition-all ease-in-out duration-500"}
-                                                    leave={" transition-all ease-in-out duration-500"}
+                                                    enter=" transition-all ease-in-out duration-500"
+                                                    leave=" transition-all ease-in-out duration-500"
                                                     enterFrom="opacity-0 "
                                                     enterTo='opacity-100 '
                                                     leaveFrom='opacity-100 '
                                                     leaveTo='opacity-0 '
                                                     className="flex flex-row justify-center"
                                                 >
-                                                    <img src={value?.imageUrl} className="mr-10 self-center" alt="testimony" />
+                                                    <Image src={value?.imageUrl} className="mr-10 self-center" alt="testimony" />
                                                 </Transition.Child>
                                             </div>
                                             <div className=" h-full pr-28">
                                                 <Transition.Child
-                                                    enter={"transition-opacity duration-500 delay-200"}
-                                                    leave={"transition-opacity duration-500 delay-200"}
+                                                    enter="transition-opacity duration-500 delay-200"
+                                                    leave="transition-opacity duration-500 delay-200"
                                                     enterFrom="opacity-0"
                                                     enterTo='opacity-100'
                                                     leaveFrom='opacity-100'
@@ -158,13 +165,13 @@ const About: NextPage = () => {
                                                     <button onClick={() => prevMember()}>
                                                         {
                                                             selectedMemeber !== 0 &&
-                                                            <img src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-left.svg" loading="lazy" alt="" />
+                                                            <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-left.svg" loading="lazy" alt="" />
                                                         }
                                                     </button>
                                                     <button onClick={() => nextMember()}>
                                                         {
                                                             selectedMemeber !== Members.length - 1 &&
-                                                            <img src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-right.svg" loading="lazy" alt="" />
+                                                            <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-right.svg" loading="lazy" alt="" />
                                                         }
                                                     </button>
                                                 </div>
@@ -193,12 +200,12 @@ const About: NextPage = () => {
                     <div className="flex flex-row font-medium border-t border-black">
                         <div className="border-black border-r w-1/2 py-10 px-10">
                             <h1 className="text-5xl font-medium tracking-tight mb-10">Read as much as you want.</h1>
-                            <img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/UnlimitedReading.svg" width="260" height="135" alt=""></img>
+                            <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/UnlimitedReading.svg" width="260" height="135" alt=""></Image>
                             <p className="font-medium my-8 text-md leading-6 self-center">Enjoy unlimited access to every story across all of your devices.</p>
                         </div>
                         <div className="border-stone-800 w-1/2 py-10 px-10">
                             <h1 className="text-5xl font-medium tracking-tight mb-10">Reward quality content.</h1>
-                            <img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/SupportWriters.svg" width="250" height="135" alt=""></img>
+                            <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/SupportWriters.svg" width="250" height="135" alt=""></Image>
                             <p className="font-medium my-8 text-md leading-6 self-center">Your membership helps us pay writers, and keeps your experience ad-free.</p>
                         </div>
                     </div>
@@ -208,12 +215,12 @@ const About: NextPage = () => {
                         <h3 className="text-8xl mb-24">Take Medium with you.</h3>
                         <p className="font-medium my-8 text-md leading-6 self-center mb-10 pr-48">Download our app so you can read, write, and publish wherever you are.</p>
                         <div className="flex flex-row">
-                            <a href="https://apps.apple.com/us/app/medium/id828256236" target="_blank" className="mr-10"><img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/AppleStore_2x.png" width="167" alt="" /></a>
-                            <a href="https://play.google.com/store/apps/details?id=com.medium.reader&amp;hl=en_US" target="_blank" className="w-inline-block"><img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/PlayStore_2x.png" width="167" alt="" /></a>
+                            <a href="https://apps.apple.com/us/app/medium/id828256236" className="mr-10"><Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/AppleStore_2x.png" width="167" alt="" /></a>
+                            <a href="https://play.google.com/store/apps/details?id=com.medium.reader&amp;hl=en_US" className="w-inline-block"><Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/PlayStore_2x.png" width="167" alt="" /></a>
                         </div>
                     </div>
                     <div className="w-1/2 flex flex-row justify-center">
-                        <img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen.png" srcSet="https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen-p-500.png 500w, https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen.png 668w" sizes="(max-width: 479px) 85vw, (max-width: 767px) 44vw, 334px" width="334" alt="" />
+                        <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen.png" sizes="(max-width: 479px) 85vw, (max-width: 767px) 44vw, 334px" width="334" alt="" />
                     </div>
                 </div>
                 <div className="flex flex-row  border-black border-t">
