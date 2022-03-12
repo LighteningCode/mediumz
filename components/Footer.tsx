@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 
 export default function Footer(props: any) {
@@ -13,10 +14,10 @@ export default function Footer(props: any) {
 
             <div className="px-5 self-center flex flex-row w-1/3 justify-center">
                 <ul className="flex flex-row justify-between">
-                    <li className="mx-3 font-thin self-center underline text-xs"><a href="/about">About</a></li>
-                    <li className="mx-3 font-thin self-center underline text-xs"><a href="/membership">Terms</a></li>
-                    <li className="mx-3 font-thin self-center underline text-xs"><a href="#">Privacy</a></li>
-                    <li className="mx-3 font-thin self-center underline text-xs"><a href="#">Help</a></li>
+                    <li className="mx-3 font-thin self-center underline text-xs"><Link href="/about" passHref>About</Link></li>
+                    <li className="mx-3 font-thin self-center underline text-xs"><Link href="/membership" passHref>Terms</Link></li>
+                    <li className="mx-3 font-thin self-center underline text-xs"><Link href="#" passHref>Privacy</Link></li>
+                    <li className="mx-3 font-thin self-center underline text-xs"><Link href="#" passHref>Help</Link></li>
                 </ul>
             </div>
         </nav>
