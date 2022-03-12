@@ -3,24 +3,24 @@ import Head from 'next/head'
 import Navbar from "../components/Navbar";
 import Footer from '../components/Footer';
 import { Transition } from '@headlessui/react'
-import { Icon } from '@iconify/react';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const Members = [
   {
     name: "Kayt Molina",
     comment: "I love Medium’s membership — it gives me access to the stories I love by the writers I love, and it allows me to help support those writers financially.",
-    imageUrl: "./membership_3.png"
+    imageUrl: "/membership_3.png"
   },
   {
     name: "Joseph Coco",
     comment: "For me, the access to a variety of ideas and perspectives is invaluable. Medium brings people from all over into one shared space where we can grow and learn together.",
-    imageUrl: "./membership_1.png"
+    imageUrl: "/membership_1.png"
   },
   {
     name: "T.S. Lowry",
     comment: "My favorite thing about a Medium membership is endlessly reading up-and-coming and well-known writers alike.",
-    imageUrl: "./membership_2.png"
+    imageUrl: "/membership_2.png"
   },
 ]
 
@@ -79,12 +79,12 @@ const Membership: NextPage = () => {
           <div className="flex flex-row font-medium text-white border-t border-white">
             <div className="border-white border-r w-1/2 py-10 px-10">
               <h1 className="text-5xl font-medium tracking-tight mb-10">Read as much as you want.</h1>
-              <img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/UnlimitedReading.svg" width="260" height="135" alt=""></img>
+              <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/UnlimitedReading.svg" width="260" height="135" alt=""></Image>
               <p className="font-medium my-8 text-md leading-6 self-center">Enjoy unlimited access to every story across all of your devices.</p>
             </div>
             <div className="border-stone-800 w-1/2 py-10 px-10">
               <h1 className="text-5xl font-medium tracking-tight mb-10">Reward quality content.</h1>
-              <img src="https://cdn-static-1.medium.com/sites/medium.com/about/images/SupportWriters.svg" width="250" height="135" alt=""></img>
+              <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/SupportWriters.svg" width="250" height="135" alt=""></Image>
               <p className="font-medium my-8 text-md leading-6 self-center">Your membership helps us pay writers, and keeps your experience ad-free.</p>
             </div>
           </div>
@@ -109,7 +109,7 @@ const Membership: NextPage = () => {
                       leaveTo='opacity-0 translate-x-20'
                       className="flex flex-row justify-start"
                     >
-                      <img src={value?.imageUrl} className="mr-10 self-start" alt="testimony" />
+                      <Image src={value?.imageUrl} width={276} height={150} className="mr-10 self-start" alt="testimony" />
                     </Transition.Child>
                   </div>
                   <div className="w-1/2 h-full">
@@ -129,7 +129,7 @@ const Membership: NextPage = () => {
                       <button onClick={() => prevMember()}>
                         {
                           selectedMemeber !== 0 &&
-                          <img src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-left.svg" loading="lazy" alt="" />
+                          <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-left.svg" loading="lazy" width={22} height={13} alt="" />
                         }
                       </button>
 
@@ -137,7 +137,7 @@ const Membership: NextPage = () => {
                       <button onClick={() => nextMember()}>
                         {
                           selectedMemeber !== Members.length - 1 &&
-                          <img src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-right.svg" loading="lazy" alt="" />
+                          <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-right.svg" loading="lazy" width={22} height={13} alt="" />
                         }
                       </button>
 
@@ -154,7 +154,7 @@ const Membership: NextPage = () => {
         <div className="flex flex-col border-t border-black py-12 bg-blue-200 relative">
           <h1 className="text-8xl font-medium tracking-tight text-center px-56 mb-10">Take your mind <br /> in new directions.</h1>
           <button className="relative z-50 text-white bg-black hover:bg-stone-800 transition-all duration-200  border w-64 text-xl self-center rounded-full px-3 py-2 mb-10">Get unlimited access</button>
-          <img src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/Membership_Footer.svg" alt="" className="absolute bottom-0 z-0 left-0"></img>
+          <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/Membership_Footer.svg" alt="" layout='fill' className="absolute bottom-0 z-0 left-0"></Image>
         </div>
 
 

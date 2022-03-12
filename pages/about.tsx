@@ -33,17 +33,17 @@ const Members = [
     {
         name: "Joel Leon",
         comment: "Medium is trying to shift the paradigm. They’re catering to those looking for fresh, new, authentic voices. I believe wholeheartedly in their mission.",
-        imageUrl: "./about_1.png"
+        imageUrl: "/about_1.png"
     },
     {
         name: "Jackie Colburn",
         comment: "Medium is a great place to read and learn from a wide range of authors. It’s not muddied up by ads. It feels like one of the few pure places to go online.",
-        imageUrl: "./about_2.png"
+        imageUrl: "/about_2.png"
     },
     {
         name: "Jasmine Bina",
         comment: "There’s no other place that combines such an excellent level of writing with a truly engaged and active community. Medium is truly where ideas are born, shared, and spread.",
-        imageUrl: "./about_3.png"
+        imageUrl: "/about_3.png"
     },
 ]
 
@@ -115,7 +115,7 @@ const About: NextPage = () => {
                 <div className="bg-orange-200">
                     <div className="border-t border-stone-800 pt-14 pb-10 flex flex-col ">
                         <h1 className="text-8xl font-medium tracking-tight text-center px-44">A living network of copying minds.</h1>
-                        <p className="font-medium my-8 text-lg leading-6 px-96 self-center text-center">Anyone can copy & write on Medium. Thought-leaders, journalists, experts, and individuals with unique perspectives share their thinking here. You’ll find pieces by independent writers from around the globe, stories we feature and leading authors, and smart takes on our own suite of blogs and publications.</p>
+                        <p className="font-medium my-8 text-lg leading-6 px-96 self-center text-center">Anyone can copy &amp; write on Medium. Thought-leaders, journalists, experts, and individuals with unique perspectives share their thinking here. You’ll find pieces by independent writers from around the globe, stories we feature and leading authors, and smart takes on our own suite of blogs and publications.</p>
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 my-7">
@@ -146,7 +146,7 @@ const About: NextPage = () => {
                                                     leaveTo='opacity-0 '
                                                     className="flex flex-row justify-center"
                                                 >
-                                                    <Image src={value?.imageUrl} className="mr-10 self-center" alt="testimony" />
+                                                    <Image src={value?.imageUrl} width={276} height={150}  className="mr-10 self-center" alt="testimony" />
                                                 </Transition.Child>
                                             </div>
                                             <div className=" h-full pr-28">
@@ -158,20 +158,20 @@ const About: NextPage = () => {
                                                     leaveFrom='opacity-100'
                                                     leaveTo='opacity-0'
                                                 >
-                                                    <p className="text-2xl font-medium mt-10">"{value?.comment}"</p>
+                                                    <p className="text-2xl font-medium mt-10">&quot;{value?.comment}&quot;</p>
                                                     <h5 className="text-2xl mt-5">{value?.name}</h5>
                                                 </Transition.Child>
                                                 <div className="flex-row flex w-16 mt-8 justify-between">
                                                     <button onClick={() => prevMember()}>
                                                         {
                                                             selectedMemeber !== 0 &&
-                                                            <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-left.svg" loading="lazy" alt="" />
+                                                            <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-left.svg" loading="lazy" width={22} height={13} alt="" />
                                                         }
                                                     </button>
                                                     <button onClick={() => nextMember()}>
                                                         {
                                                             selectedMemeber !== Members.length - 1 &&
-                                                            <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-right.svg" loading="lazy" alt="" />
+                                                            <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-right.svg" loading="lazy" width={22} height={13} alt="" />
                                                         }
                                                     </button>
                                                 </div>
@@ -215,12 +215,12 @@ const About: NextPage = () => {
                         <h3 className="text-8xl mb-24">Take Medium with you.</h3>
                         <p className="font-medium my-8 text-md leading-6 self-center mb-10 pr-48">Download our app so you can read, write, and publish wherever you are.</p>
                         <div className="flex flex-row">
-                            <a href="https://apps.apple.com/us/app/medium/id828256236" className="mr-10"><Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/AppleStore_2x.png" width="167" alt="" /></a>
-                            <a href="https://play.google.com/store/apps/details?id=com.medium.reader&amp;hl=en_US" className="w-inline-block"><Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/PlayStore_2x.png" width="167" alt="" /></a>
+                            <Link href="https://apps.apple.com/us/app/medium/id828256236" passHref><Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/AppleStore_2x.png" layout='fill' width="167" alt="" /></Link>
+                            <Link href="https://play.google.com/store/apps/details?id=com.medium.reader&amp;hl=en_US" passHref ><Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/PlayStore_2x.png" layout='fill' width="167" alt="" /></Link>
                         </div>
                     </div>
                     <div className="w-1/2 flex flex-row justify-center">
-                        <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen.png" sizes="(max-width: 479px) 85vw, (max-width: 767px) 44vw, 334px" width="334" alt="" />
+                        <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen.png" layout='fill' sizes="(max-width: 479px) 85vw, (max-width: 767px) 44vw, 334px" width="334" alt="" />
                     </div>
                 </div>
                 <div className="flex flex-row  border-black border-t">
