@@ -92,7 +92,7 @@ const Membership: NextPage = () => {
         </div>
 
         <div style={{ height: "400px" }} className="flex flex-col pt-20 pb-14 relative">
-          <h3 className="text-center text-5xl mb-7">Why I'm a Medium Member...</h3>
+          <h3 className="text-center text-5xl mb-7">Why I&apos;m a Medium Member...</h3>
 
 
           <div style={{ height: "300px" }} className="absolute mt-8">

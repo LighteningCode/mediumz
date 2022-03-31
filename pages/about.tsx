@@ -184,7 +184,7 @@ const About: NextPage = () => {
                     </div>
                     <div className="border-t border-white pt-14 pb-5 flex flex-col ">
                         <h1 className="text-8xl font-medium tracking-tight text-center px-44">Create the space for your thinking to take off.</h1>
-                        <p className="font-medium my-8 text-lg leading-6 px-96 self-center text-center">A blank page is also a door. At Medium you can walk through it. It's easy and free to share your thinking on any topic, connect with an audience, express yourself with a range of publishing tools, and even earn money for your work.</p>
+                        <p className="font-medium my-8 text-lg leading-6 px-96 self-center text-center">A blank page is also a door. At Medium you can walk through it. It&apos;s easy and free to share your thinking on any topic, connect with an audience, express yourself with a range of publishing tools, and even earn money for your work.</p>
                     </div>
 
                     <button className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-150  border w-56 text-xl self-center rounded-full px-3 py-2">Write on Mediumz</button>
