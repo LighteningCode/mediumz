@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import { Transition } from '@headlessui/react'
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import SupportWriters from '../assets/svg/support-writers';
+import UnlimitedReading from '../assets/svg/unlimited-reading';
 
 const Writer = ({ image, name, link, index, portfolio }: any) => {
     return (
@@ -60,27 +62,27 @@ const About: NextPage = () => {
         }, 5000);
     }, [selectedMemeber]);
 
-        const nextMember = useCallback(
-            () => {
-                if (Members.length === selectedMemeber + 1) {
-                    setSelectedMemeber(0)
-                } else {
-                    setSelectedMemeber(value => value + 1)
-                }
-            },
-            [selectedMemeber, Members],
-        );
+    const nextMember = useCallback(
+        () => {
+            if (Members.length === selectedMemeber + 1) {
+                setSelectedMemeber(0)
+            } else {
+                setSelectedMemeber(value => value + 1)
+            }
+        },
+        [selectedMemeber, Members],
+    );
 
-        const prevMember = useCallback(
-            () => {
-                if (selectedMemeber === 0) {
-                    setSelectedMemeber(Members.length - 1)
-                } else {
-                    setSelectedMemeber(value => value - 1)
-                }
-            },
-            [selectedMemeber, Members],
-        );
+    const prevMember = useCallback(
+        () => {
+            if (selectedMemeber === 0) {
+                setSelectedMemeber(Members.length - 1)
+            } else {
+                setSelectedMemeber(value => value - 1)
+            }
+        },
+        [selectedMemeber, Members],
+    );
 
     useEffect(() => {
         console.log("Selected member", selectedMemeber)
@@ -134,9 +136,9 @@ const About: NextPage = () => {
                         <div className="border-stone-800 w-1/2 relative">
                             {
                                 Members.map((value, idx) =>
-                                    <div style={{ zIndex: 0 }} key={idx} className="absolute top-3 h-full ml-8">
+                                    <div style={{ zIndex: 0 }} key={idx} className="absolute top-3 h-full w-full ml-8">
                                         <Transition key={idx} show={idx === selectedMemeber} className="w-full h-full flex flex-col justify-center">
-                                            <div className="w-1/2 flex flex-row justify-end mt-16">
+                                            <div className="w-1/2 flex flex-row h-full justify-end mt-16">
                                                 <Transition.Child
                                                     enter=" transition-all ease-in-out duration-500"
                                                     leave=" transition-all ease-in-out duration-500"
@@ -144,15 +146,17 @@ const About: NextPage = () => {
                                                     enterTo='opacity-100 '
                                                     leaveFrom='opacity-100 '
                                                     leaveTo='opacity-0 '
-                                                    className="flex flex-row justify-center"
+                                                    className="flex flex-row justify-center w-full h-full"
                                                 >
-                                                    <Image src={value?.imageUrl} width={276} height={150}  className="mr-10 self-center" alt="testimony" />
+                                                    <div  style={{width: '100%', height: '100%', position: 'relative'}}>
+                                                        <Image src={value?.imageUrl} layout="fill" objectFit="contain" className="mr-10 self-center" alt="testimony" />
+                                                    </div>
                                                 </Transition.Child>
                                             </div>
                                             <div className=" h-full pr-28">
                                                 <Transition.Child
-                                                    enter="transition-opacity duration-500 delay-200"
-                                                    leave="transition-opacity duration-500 delay-200"
+                                                    enter="transition-opacity duration-500"
+                                                    leave="transition-opacity duration-500"
                                                     enterFrom="opacity-0"
                                                     enterTo='opacity-100'
                                                     leaveFrom='opacity-100'
@@ -200,12 +204,12 @@ const About: NextPage = () => {
                     <div className="flex flex-row font-medium border-t border-black">
                         <div className="border-black border-r w-1/2 py-10 px-10">
                             <h1 className="text-5xl font-medium tracking-tight mb-10">Read as much as you want.</h1>
-                            <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/UnlimitedReading.svg" width="260" height="135" alt=""></Image>
+                            <UnlimitedReading />
                             <p className="font-medium my-8 text-md leading-6 self-center">Enjoy unlimited access to every story across all of your devices.</p>
                         </div>
                         <div className="border-stone-800 w-1/2 py-10 px-10">
                             <h1 className="text-5xl font-medium tracking-tight mb-10">Reward quality content.</h1>
-                            <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/SupportWriters.svg" width="250" height="135" alt=""></Image>
+                            <SupportWriters />
                             <p className="font-medium my-8 text-md leading-6 self-center">Your membership helps us pay writers, and keeps your experience ad-free.</p>
                         </div>
                     </div>
