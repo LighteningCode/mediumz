@@ -5,12 +5,12 @@ export default function Navbar(props: any) {
 
   return (
    <nav className={`flex flex-row justify-between py-5 border-b transition-all duration-300 border-black ${props.className ? props.className : ""}`}>
-     <div className="flex flex-row pl-20">
+     <div className="flex flex-row pl-20 mobile:pl-4">
        <Link href="/"><h2 className="text-3xl font-bold cursor-pointer">Mediumz</h2></Link>
      </div>
 
-     <div className="pr-20 self-center flex flex-row">
-       <ul className="flex flex-row justify-between">
+     <div className="pr-20 mobile:pr-4 self-center flex flex-row">
+       <ul className="flex flex-row justify-between mobile:hidden">
          <li className="mx-3 font-thin self-center text-sm"><Link href="/about">Our story</Link></li>
          <li className="mx-3 font-thin self-center text-sm"><Link href="/membership">Membership</Link></li>
          <li className="mx-3 font-thin self-center text-sm"><Link href="/creators">Write</Link></li>
