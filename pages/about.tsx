@@ -57,11 +57,11 @@ const About: NextPage = () => {
 
     const [selectedMemeber, setSelectedMemeber] = useState(0);
 
-    useEffect(() => {
-        setTimeout(() => {
-            nextMember()
-        }, 5000);
-    }, [selectedMemeber]);
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         nextMember()
+    //     }, 5000);
+    // }, [selectedMemeber]);
 
     const nextMember = useCallback(
         () => {
@@ -89,18 +89,18 @@ const About: NextPage = () => {
         console.log("Selected member", selectedMemeber)
     }, [selectedMemeber]);
 
-    
-  const [atTop, setAtTop] = useState(true)
 
-  useScrollPosition(
-    ({ currPos }: any) => {
-      setAtTop(currPos.y === 0)
-    },
-    [atTop],
-    null,
-    true,
-    300
-  )
+    const [atTop, setAtTop] = useState(true)
+
+    useScrollPosition(
+        ({ currPos }: any) => {
+            setAtTop(currPos.y === 0)
+        },
+        [atTop],
+        null,
+        true,
+        300
+    )
 
     return (
         <div>
@@ -162,7 +162,7 @@ const About: NextPage = () => {
                                                     leaveTo='opacity-0 '
                                                     className="flex flex-row justify-center w-full h-full"
                                                 >
-                                                    <div  style={{width: '100%', height: '100%', position: 'relative'}}>
+                                                    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                                                         <Image src={value?.imageUrl} layout="fill" objectFit="contain" className="mr-10 self-center" alt="testimony" />
                                                     </div>
                                                 </Transition.Child>
@@ -230,15 +230,21 @@ const About: NextPage = () => {
                 </div>
                 <div className="flex flex-row bg-green-200  border-black pt-10">
                     <div className="w-1/2 px-7">
-                        <h3 className="text-8xl mb-24">Take Medium with you.</h3>
+                        <h3 style={{lineHeight: 0.85}} className="text-8xl mb-10">Take Medium with you.</h3>
                         <p className="font-medium my-8 text-md leading-6 self-center mb-10 pr-48">Download our app so you can read, write, and publish wherever you are.</p>
-                        <div className="flex flex-row">
-                            <Link href="https://apps.apple.com/us/app/medium/id828256236" passHref><Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/AppleStore_2x.png" layout='fill' width="167" alt="" /></Link>
-                            <Link href="https://play.google.com/store/apps/details?id=com.medium.reader&amp;hl=en_US" passHref ><Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/PlayStore_2x.png" layout='fill' width="167" alt="" /></Link>
+                        <div className="flex-row flex justify-between pr-48 mb-10">
+                            <button className='mr-5'>
+                                <Image src="/AppleStore_2x.png" loading="lazy" layout='intrinsic' width={580} height={180} alt="" />
+                            </button>
+                            <button>
+                                <Image src="/PlayStore_2x.png" loading="lazy" layout='intrinsic' width={580} height={180} alt="" />
+                            </button>
                         </div>
                     </div>
-                    <div className="w-1/2 flex flex-row justify-center">
-                        <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/About_iPhone_screen.png" layout='fill' sizes="(max-width: 479px) 85vw, (max-width: 767px) 44vw, 334px" width="334" alt="" />
+                    <div className="w-1/2 flex flex-row justify-center relative">
+                        <div className='absolute -bottom-1.5'>
+                            <Image src="/creator-find-points-iphones.png" loading="lazy" layout='fixed' width={330} height={334} alt="" />
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-row  border-black border-t">
