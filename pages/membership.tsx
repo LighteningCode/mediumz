@@ -8,6 +8,7 @@ import Image from 'next/image';
 import SupportWriters from '../assets/svg/support-writers';
 import UnlimitedReading from '../assets/svg/unlimited-reading';
 import { ArrowLeft, ArrowRight } from '../assets/svg/arrow';
+import { useScrollPosition } from '../hooks/useScrollPosition';
 
 const Members = [
   {
@@ -57,6 +58,18 @@ const Membership: NextPage = () => {
     }
   }
 
+  const [atTop, setAtTop] = useState(true)
+
+  useScrollPosition(
+    ({ currPos }: any) => {
+      setAtTop(currPos.y === 0)
+    },
+    [atTop],
+    null,
+    true,
+    300
+  )
+
   return (
     <div>
       <Head>
@@ -65,7 +78,7 @@ const Membership: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar className="fixed top-0 left-0 w-full z-50" />
+      <Navbar className={`fixed top-0 left-0 w-full z-50 ${atTop ? "bg-blue-500" : "bg-white"}`} />
 
       <main className="flex flex-col">
         <div className="flex flex-col bg-blue-500 border-b border-white pt-20">

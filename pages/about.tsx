@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import SupportWriters from '../assets/svg/support-writers';
 import UnlimitedReading from '../assets/svg/unlimited-reading';
+import { useScrollPosition } from '../hooks/useScrollPosition';
 
 const Writer = ({ image, name, link, index, portfolio }: any) => {
     return (
@@ -88,6 +89,19 @@ const About: NextPage = () => {
         console.log("Selected member", selectedMemeber)
     }, [selectedMemeber]);
 
+    
+  const [atTop, setAtTop] = useState(true)
+
+  useScrollPosition(
+    ({ currPos }: any) => {
+      setAtTop(currPos.y === 0)
+    },
+    [atTop],
+    null,
+    true,
+    300
+  )
+
     return (
         <div>
             <Head>
@@ -96,7 +110,7 @@ const About: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Navbar className="fixed top-0 left-0 w-full z-50" />
+            <Navbar className={`fixed top-0 left-0 w-full z-50 ${atTop ? "bg-white" : "bg-white"}`} />
 
 
             <section className="flex flex-col pt-44 py-24 px-20 border-b border-stone-800">
@@ -194,7 +208,7 @@ const About: NextPage = () => {
                     <button className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-150  border w-56 text-xl self-center rounded-full px-3 py-2 my-5">Write on Mediumz</button>
                 </div>
 
-                <div className="flex relative flex-col z-50 bg-green-500 border-b border-black pt-10">
+                <div className="flex relative flex-col z-40 bg-green-500 border-b border-black pt-10">
                     <div className=" pt-14 pb-5 flex flex-col ">
                         <h1 className="text-8xl font-medium tracking-tight text-center px-44">Get more with membership.</h1>
                         <p className="font-medium my-8 text-lg leading-6 px-96 self-center text-center">Become a Medium member to enjoy unlimited access for 3 bananas/month and directly support the writers you read most.</p>

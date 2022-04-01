@@ -6,6 +6,8 @@ import TrendingSvg from '../assets/svg/trending';
 import MoreHorizontalSvg from '../assets/svg/more';
 import BookmarkOutline from '../assets/svg/bookmark-outline';
 import Link from 'next/link';
+import { useState } from 'react';
+import { useScrollPosition } from '../hooks/useScrollPosition';
 
 
 const trending: TrendingItemProps[] = [
@@ -142,6 +144,19 @@ function ArticlePost({ authorName, title, date, time, authorImg, subTitle, mainT
   )
 }
 const Home: NextPage = () => {
+
+  const [atTop, setAtTop] = useState(true)
+
+  useScrollPosition(
+    ({ currPos }: any) => {
+      setAtTop(currPos.y === 0)
+    },
+    [atTop],
+    null,
+    true,
+    300
+  )
+
   return (
     <div>
       <Head>
@@ -150,9 +165,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
+      <Navbar className={`fixed top-0 left-0 w-full z-50 ${atTop ? "bg-yellow-400" : "bg-white"}`} />
 
-      <section className='flex flex-row  bg-yellow-400 border-b border-black'>
+      <section className='flex flex-row pt-20  bg-yellow-400 border-b border-black'>
         <div className="w-1/2 px-14 py-12">
           <div>
             <h2 className='text-7xl'>Mediumz is a place to read,copy,and remake</h2>

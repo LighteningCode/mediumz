@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import { useState } from 'react';
 import { Transition } from '@headlessui/react';
 import { Icon } from '@iconify/react';
+import { useScrollPosition } from '../hooks/useScrollPosition';
 
 const faqdata = [
     {
@@ -82,6 +83,21 @@ const Question = ({ image, question, answer, link, index, portfolio }: any) => {
 }
 
 const Creators: NextPage = () => {
+
+
+    
+  const [atTop, setAtTop] = useState(true)
+
+  useScrollPosition(
+    ({ currPos }: any) => {
+      setAtTop(currPos.y === 0)
+    },
+    [atTop],
+    null,
+    true,
+    300
+  )
+
     return (
         <div>
             <Head>
@@ -90,7 +106,7 @@ const Creators: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Navbar className="fixed top-0 left-0 w-full z-50" />
+            <Navbar className={`fixed top-0 left-0 w-full z-50 ${atTop ? "bg-red-500" : "bg-white"}`} />
 
             <main className="flex flex-col">
                 <div style={{ backgroundColor: "#F24D2E" }} className="flex flex-col bg-red-500 border-b border-black pt-20">
