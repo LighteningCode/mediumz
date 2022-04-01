@@ -9,6 +9,7 @@ import SupportWriters from '../assets/svg/support-writers';
 import UnlimitedReading from '../assets/svg/unlimited-reading';
 import { ArrowLeft, ArrowRight } from '../assets/svg/arrow';
 import { useScrollPosition } from '../hooks/useScrollPosition';
+import MembershipFooter from '../assets/svg/membership-footer';
 
 const Members = [
   {
@@ -173,7 +174,7 @@ const Membership: NextPage = () => {
         <div className="flex flex-col border-t border-black py-12 bg-blue-200 relative">
           <h1 className="text-8xl font-medium tracking-tight text-center px-56 mb-10">Take your mind <br /> in new directions.</h1>
           <button className="relative z-50 text-white bg-black hover:bg-stone-800 transition-all duration-200  border w-64 text-xl self-center rounded-full px-3 py-2 mb-10">Get unlimited access</button>
-          <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/Membership_Footer.svg" alt="" layout='fill' className="absolute bottom-0 z-0 left-0"></Image>
+          <MembershipFooter className="absolute bottom-0" />
         </div>
 
 
