@@ -133,7 +133,7 @@ function ArticlePost({ authorName, title, date, time, authorImg, subTitle, mainT
           <small className="text-sm text-stone-500">{date || "No Date"} · {time || 0} min read {mainTopic && <> · <TextPill text={mainTopic} /> </>}  </small>
           <div className="flex flex-row">
             <BookmarkOutline className="mx-1" />
-            <MoreHorizontalSvg className="mx-1" />
+            <MoreHorizontalSvg className="mx-1 mobile:hidden" />
           </div>
         </div>
       </div>
@@ -167,28 +167,28 @@ const Home: NextPage = () => {
 
       <Navbar className={`fixed top-0 left-0 w-full z-50 ${atTop ? "bg-yellow-400" : "bg-white"}`} />
 
-      <section className='flex flex-row pt-20  bg-yellow-400 border-b border-black'>
-        <div className="w-1/2 px-14 py-12">
+      <section className='flex flex-row mobile:flex-col pt-20  bg-yellow-400 border-b border-black'>
+        <div className="w-1/2 px-14 mobile:px-6 mobile:w-full py-12">
           <div>
-            <h2 className='text-7xl'>Mediumz is a place to read,copy,and remake</h2>
+            <h2 className='text-7xl mobile:text-5xl'>Mediumz is a place to read,copy,and remake</h2>
             <p className='mb-10 mt-2 font-semibold text-stone-800'>It&apos;s easy and free to post your thinking on any topic and connect with millions of readers.</p>
             <span className="px-5 py-3 bg-white cursor-pointer rounded-full text-base font-thin text-stone-800 border border-stone-800">Start Writing</span>
           </div>
 
         </div>
-        <div className="w-1/2 relative">
+        <div className="w-1/2 relative mobile:hidden">
           <div className="absolute  -bottom-1.5 right-20">
             <Image src="/comma.png" alt="Comma" width={400} height={350} />
           </div>
         </div>
       </section>
 
-      <section className="flex flex-col py-8 px-20 border border-gray-200">
+      <section className="flex flex-col py-8 px-20 mobile:px-5 border border-gray-200">
         <div className="flex flex-row mb-5">
           <TrendingSvg />
           <p className='uppercase text-sm self-center ml-2 text-stone-700 font-semibold '>Trending On Medium</p>
         </div>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 mobile:grid-cols-1 mobile:gap-2 gap-4">
           {
             trending.map((value, idx) =>
               <TrendingItem
@@ -205,19 +205,19 @@ const Home: NextPage = () => {
         </div>
       </section>
 
-      <main className="flex flex-row py-10">
-        <div className="w-7/12 px-16">
+      <main className="flex flex-row mobile:flex-col-reverse py-10">
+        <div className="w-7/12 mobile:w-full mobile:px-5 px-16">
           <ArticlePost />
           <ArticlePost />
           <ArticlePost />
           <ArticlePost />
           <ArticlePost />
         </div>
-        <div className="w-5/12 flex flex-col">
-          <div className="flex flex-col px-20 sticky top-10">
-            <p className="mx-0 mb-3 text-xs font-bold ">DISCOVER MORE OF WHAT MATTERS TO YOU</p>
+        <div className="w-5/12 flex flex-col mobile:w-full mobile:px-0">
+          <div className="flex flex-col px-20 sticky mobile:px-0 top-10">
+            <p className="mx-0 mb-3 text-xs font-bold mobile:px-4">DISCOVER MORE OF WHAT MATTERS TO YOU</p>
 
-            <div className="flex flex-row flex-wrap w-full">
+            <div className="flex flex-row flex-wrap mobile:px-4 w-full">
               <TextIdea text={"Relationships"} />
               <TextIdea text={"Data Science"} />
               <TextIdea text={"Programming"} />
@@ -232,8 +232,7 @@ const Home: NextPage = () => {
 
             <hr className="border-t border-stone-300 my-5" />
 
-
-            <div className="flex flex-row flex-wrap w-full pr-6">
+            <div className="flex flex-row flex-wrap w-full mobile:px-4 mobile:hidden pr-6">
               {
                 LINKS.map((value, indx) =>
                   <Link key={indx} href={value.href}>
