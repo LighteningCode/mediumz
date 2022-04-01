@@ -5,6 +5,9 @@ import Footer from '../components/Footer';
 import { Transition } from '@headlessui/react'
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import SupportWriters from '../assets/svg/support-writers';
+import UnlimitedReading from '../assets/svg/unlimited-reading';
+import { ArrowLeft, ArrowRight } from '../assets/svg/arrow';
 
 const Members = [
   {
@@ -32,11 +35,11 @@ const Membership: NextPage = () => {
 
   const [selectedMemeber, setSelectedMemeber] = useState(0);
 
-  useEffect(() => {
-    setTimeout(() => {
-      nextMember()
-    }, 5000);
-  }, [selectedMemeber]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     nextMember()
+  //   }, 5000);
+  // }, [selectedMemeber]);
 
   const nextMember = () => {
     if (Members.length === selectedMemeber + 1) {
@@ -79,12 +82,12 @@ const Membership: NextPage = () => {
           <div className="flex flex-row font-medium text-white border-t border-white">
             <div className="border-white border-r w-1/2 py-10 px-10">
               <h1 className="text-5xl font-medium tracking-tight mb-10">Read as much as you want.</h1>
-              <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/UnlimitedReading.svg" width="260" height="135" alt=""></Image>
+              <UnlimitedReading />
               <p className="font-medium my-8 text-md leading-6 self-center">Enjoy unlimited access to every story across all of your devices.</p>
             </div>
             <div className="border-stone-800 w-1/2 py-10 px-10">
               <h1 className="text-5xl font-medium tracking-tight mb-10">Reward quality content.</h1>
-              <Image src="https://cdn-static-1.medium.com/sites/medium.com/about/images/SupportWriters.svg" width="250" height="135" alt=""></Image>
+              <SupportWriters />
               <p className="font-medium my-8 text-md leading-6 self-center">Your membership helps us pay writers, and keeps your experience ad-free.</p>
             </div>
           </div>
@@ -98,8 +101,8 @@ const Membership: NextPage = () => {
           <div style={{ height: "300px" }} className="absolute mt-8">
             {
               Members.map((value, idx) =>
-                <Transition show={idx === selectedMemeber} key={idx} className="w-full h-full flex flex-row justify-start pt-16">
-                  <div className="w-1/2 flex flex-row justify-end">
+                <Transition show={idx === selectedMemeber} key={idx} className="w-full h-full flex flex-row justify-start pt-5 mb-28">
+                  <div className="w-1/2 h-full flex flex-row justify-end">
                     <Transition.Child
                       enter={" transition-all ease-in-out duration-500"}
                       leave={" transition-all ease-in-out duration-500"}
@@ -107,9 +110,11 @@ const Membership: NextPage = () => {
                       enterTo='opacity-100 translate-x-0'
                       leaveFrom='opacity-100 translate-x-0'
                       leaveTo='opacity-0 translate-x-20'
-                      className="flex flex-row justify-start"
+                      className="flex flex-row justify-end w-full h-full"
                     >
-                      <Image src={value?.imageUrl} width={276} height={150} className="mr-10 self-start" alt="testimony" />
+                      <div style={{ width: '300px', height: '300px', position: 'relative', marginRight: 30 }}>
+                        <Image src={value?.imageUrl} layout="fill" objectFit="contain" className="mr-20 top-0 right-0 self-center" alt="testimony" />
+                      </div>
                     </Transition.Child>
                   </div>
                   <div className="w-1/2 h-full">
@@ -120,29 +125,30 @@ const Membership: NextPage = () => {
                       enterTo='opacity-100'
                       leaveFrom='opacity-100'
                       leaveTo='opacity-0'
+                      className="flex flex-col justify-center h-full"
                     >
                       <p className="text-xl font-medium mr-24">&quot;{value?.comment}&quot;</p>
                       <h5 className="text-2xl mt-5">{value?.name}</h5>
+                      <div className="flex-row flex w-16 mt-8 justify-between ">
+
+                        <button onClick={() => prevMember()}>
+                          {
+                            selectedMemeber !== 0 &&
+                            <ArrowLeft />
+                          }
+                        </button>
+
+
+                        <button onClick={() => nextMember()}>
+                          {
+                            selectedMemeber !== Members.length - 1 &&
+                            <ArrowRight />
+                          }
+                        </button>
+
+                      </div>
                     </Transition.Child>
-                    <div className="flex-row flex w-16 mt-8 justify-between">
 
-                      <button onClick={() => prevMember()}>
-                        {
-                          selectedMemeber !== 0 &&
-                          <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-left.svg" loading="lazy" width={22} height={13} alt="" />
-                        }
-                      </button>
-
-
-                      <button onClick={() => nextMember()}>
-                        {
-                          selectedMemeber !== Members.length - 1 &&
-                          <Image src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/arrow-right.svg" loading="lazy" width={22} height={13} alt="" />
-                        }
-                      </button>
-
-
-                    </div>
                   </div>
                 </Transition>
               )
