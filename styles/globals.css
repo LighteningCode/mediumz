@@ -10,6 +10,20 @@
   .textidea {
     @apply py-2 px-3 mr-2 my-1 border cursor-pointer border-gray-200 rounded-sm text-stone-500
   }
+
+  nav > * {
+    @apply border-black
+  }
+
+  .membership.b-member > * {
+    @apply border-black
+  }
+
+  nav.membership > * {
+    @apply border-white
+  }
+
+  
 }
 
 h1, h2, h3, h4, h5, h6 {

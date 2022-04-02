@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function Navbar(props: any) {
 
   return (
-    <nav className={`${props.className ? props.className : ""}`}>
-      <nav className={`flex flex-row justify-between py-5 mobile:py-4 border-b  transition-all duration-300 `}>
+    <nav className={`transition-all duration-300 ${props.className ? props.className : ""}`}>
+      <nav className={`flex flex-row justify-between py-5 border-b`}>
         <div className="flex flex-row pl-20 mobile:pl-4">
           <Link href="/"><h2 className="text-3xl font-bold cursor-pointer">Mediumz</h2></Link>
         </div>
@@ -27,6 +27,7 @@ export default function Navbar(props: any) {
         <li className="mx-3 font-normal self-center text-sm"><Link href="/creators">Write</Link></li>
         <li className="mx-3 font-normal self-center text-sm"><Link href="/signin">Sign In</Link></li>
       </ul>
+
     </nav>
 
   )
