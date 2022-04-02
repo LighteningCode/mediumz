@@ -112,7 +112,7 @@ const Creators: NextPage = () => {
                 <div style={{ backgroundColor: "#F24D2E" }} className="flex flex-col bg-red-500 border-b border-black pt-20">
 
                     <div className="flex flex-row mobile:flex-col">
-                        <div className="flex flex-col mobile:w-full w-8/12 pl-6 mobile:px-4 pt-10 text-black">
+                        <div className="flex flex-col mobile:w-full w-8/12 pl-6 mobile:px-4 mobile:pt-14 pt-10 text-black">
                             <p style={{ letterSpacing: "10px" }} className="font-medium text-sm uppercase tracking-widest leading-6 text-white">Start a blog today</p>
                             <h1 className="text-8xl mobile:text-3xl font-medium tracking-tight mb-5">Publish, grow, <br className='mobile:hidden' /> and earn, all in  <br className='mobile:hidden' />  one place.</h1>
                             <img src="./creators.png" className="h-auto w-full hidden mobile:flex"></img>
