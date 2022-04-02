@@ -69,11 +69,11 @@ const About: NextPage = () => {
 
     const [selectedMemeber, setSelectedMemeber] = useState(0);
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         nextMember()
-    //     }, 5000);
-    // }, [selectedMemeber]);
+    useEffect(() => {
+        setTimeout(() => {
+            nextMember()
+        }, 5000);
+    }, [selectedMemeber]);
 
     const nextMember = useCallback(
         () => {

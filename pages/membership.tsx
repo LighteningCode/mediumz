@@ -37,11 +37,11 @@ const Membership: NextPage = () => {
 
   const [selectedMemeber, setSelectedMemeber] = useState(0);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     nextMember()
-  //   }, 5000);
-  // }, [selectedMemeber]);
+  useEffect(() => {
+    setTimeout(() => {
+      nextMember()
+    }, 5000);
+  }, [selectedMemeber]);
 
   const nextMember = () => {
     if (Members.length === selectedMemeber + 1) {
