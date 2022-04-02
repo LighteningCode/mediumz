@@ -12,12 +12,12 @@ export default function Navbar(props: any) {
 
         <div className="pr-20 mobile:pr-4 self-center flex flex-row">
           <ul className="flex flex-row justify-between mobile:hidden">
-            <li className="mx-3 font-thin self-center text-sm"><Link href="/about">Our story</Link></li>
-            <li className="mx-3 font-thin self-center text-sm"><Link href="/membership">Membership</Link></li>
-            <li className="mx-3 font-thin self-center text-sm"><Link href="/creators">Write</Link></li>
-            <li className="mx-3 font-thin self-center text-sm"><Link href="/signin">Sign In</Link></li>
+            <li className="mx-3 font-normal self-center text-sm"><Link href="/about">Our story</Link></li>
+            <li className="mx-3 font-normal self-center text-sm"><Link href="/membership">Membership</Link></li>
+            <li className="mx-3 font-normal self-center text-sm"><Link href="/creators">Write</Link></li>
+            <li className="mx-3 font-normal self-center text-sm"><Link href="/signin">Sign In</Link></li>
           </ul>
-          <span className="px-4 py-2 bg-stone-900 cursor-pointer hover:bg-black rounded-full text-sm font-thin ml-5 text-white">Get Started</span>
+          <span className="px-4 py-2 bg-stone-900 cursor-pointer hover:bg-black rounded-full mobile:font-light text-sm font-normal ml-5 text-white">Get Started</span>
         </div>
       </nav>
 
