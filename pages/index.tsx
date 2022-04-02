@@ -167,7 +167,7 @@ const Home: NextPage = () => {
 
       <Navbar className={`fixed top-0 left-0 w-full z-50 ${atTop ? "bg-yellow-400" : "bg-white"}`} />
 
-      <section className='flex flex-row mobile:flex-col pt-20  bg-yellow-400 border-b border-black'>
+      <section className='flex flex-row mobile:flex-col mobile:pt-24 pt-20  bg-yellow-400 border-b border-black'>
         <div className="w-1/2 px-14 mobile:px-6 mobile:w-full py-12">
           <div>
             <h2 className='text-7xl mobile:text-5xl'>Mediumz is a place to read,copy,and remake</h2>
