@@ -4,7 +4,6 @@ import Navbar from "../components/Navbar";
 import Footer from '../components/Footer';
 import { Transition } from '@headlessui/react'
 import { Icon } from '@iconify/react';
-import { useEffect, useState } from 'react';
 
 type ButtonType = {
     label: string,
@@ -29,9 +28,9 @@ const SignIn: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className="flex flex-col bg-white h-screen w-screen px-72 py-28">
+            <main className="flex flex-col mobile:justify-center bg-white h-screen w-screen mobile:px-5 mobile:py-5 px-72 py-28">
 
-                <div className="h-full w-full border border-gray-50 shadow-md flex p-10 flex-col">
+                <div className="h-full w-full mobile:h-auto border border-gray-50 shadow-md flex mobile:p-5 p-10 flex-col">
 
                     <h3 className="text-3xl self-center text-stone-800">Welcome back.</h3>
 
