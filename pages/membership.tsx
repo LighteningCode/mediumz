@@ -79,7 +79,7 @@ const Membership: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar className={`fixed top-0 left-0 w-full z-50  ${atTop ? "bg-blue-500 text-white border-white" : "bg-white border-black"}`} />
+      <Navbar className={`fixed top-0 left-0 w-full z-50  membership ${atTop ? "bg-blue-500 text-white border-white" : "bg-white border-black b-member"}`} />
 
       <main className="flex flex-col">
 
