@@ -10,6 +10,11 @@ module.exports = {
       'desktop': {'max': '1280px'},
       'large-screen':{'max': '1536px'}
     },
+    extend: {
+      colors:{
+        "red-orange":"#F24D2E"
+      }
+    }
   },
   plugins: [],
 }

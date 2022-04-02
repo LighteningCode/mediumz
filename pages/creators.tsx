@@ -106,10 +106,10 @@ const Creators: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Navbar className={`fixed top-0 left-0 w-full z-50 ${atTop ? "bg-red-500" : "bg-white"}`} />
+            <Navbar className={`fixed top-0 left-0 w-full z-50 ${atTop ? "bg-red-orange" : "bg-white"}`} />
 
             <main className="flex flex-col">
-                <div style={{ backgroundColor: "#F24D2E" }} className="flex flex-col bg-red-500 border-b border-black pt-20">
+                <div className="flex flex-col bg-red-orange border-b border-black pt-20">
 
                     <div className="flex flex-row mobile:flex-col">
                         <div className="flex flex-col mobile:w-full w-8/12 pl-6 mobile:px-4 mobile:pt-14 pt-10 text-black">
