@@ -82,9 +82,14 @@ const Question = ({ image, question, answer, link, index, portfolio }: any) => {
     )
 }
 
-const Creators: NextPage = () => {
 
+type AuthorType = {
+    name: any
+    image: any
+    portfolio: any
+}
 
+const Creators: NextPage = ({ authors }: any) => {
 
     const [atTop, setAtTop] = useState(true)
 
@@ -131,9 +136,10 @@ const Creators: NextPage = () => {
                             <h1 className="text-8xl mobile:text-4xl font-medium tracking-tight mb-10">Join a network of curious minds.</h1>
                         </div>
                         <div className="border-stone-800 w-1/2 mobile:w-full mobile:py-3 mobile:px-5 py-10 px-10">
-                            {[0, 0, 0, 0, 0, 0].map((value, idx) =>
-                                <Writer key={idx} index={idx} />
-                            )
+                            {
+                                authors?.filter((_: any, idx: any) => idx < 6).map((data: AuthorType, idx: any) =>
+                                    <Writer key={idx} index={idx} name={data?.name} image={data?.image} portfolio={data?.portfolio} />
+                                )
                             }
                         </div>
                     </div>
@@ -145,7 +151,7 @@ const Creators: NextPage = () => {
                         <div className="flex flex-col w-1/2 mobile:w-full mobile:pl-5 pl-6 text-black justify-between">
                             <h1 className="text-8xl mobile:text-4xl font-medium tracking-tight mb-14 mobile:mb-4 mt-7">Create<br className='mobile:hidden' />  your  space.</h1>
                             <p className="text-lg mobile:text-base font-medium mb-5 mobile:w-full w-96">Tell your story your way — with different ways to write, style, and brand your work.</p>
-                                <button className="relative z-50 text-white bg-black hover:bg-stone-800 transition-all duration-200  border w-64 text-xl mobile:self-start self-center rounded-full px-3 mobile:px-0 py-2 mb-10">Start Writing</button>
+                            <button className="relative z-50 text-white bg-black hover:bg-stone-800 transition-all duration-200  border w-64 text-xl mobile:self-start self-center rounded-full px-3 mobile:px-0 py-2 mb-10">Start Writing</button>
                         </div>
 
                         <div className="flex flex-col mobile:w-full mobile:px-5 w-1/2 pl-6 pt-10 text-black">
@@ -232,6 +238,39 @@ const Creators: NextPage = () => {
             <Footer className="text-white border-t border-white bg-black" />
         </div>
     )
+}
+
+
+Creators.getInitialProps = async () => {
+
+
+    const query = `
+    {
+        authors{
+          name
+          image
+          portfolio
+        }
+      }
+    `
+
+    try {
+        const response = await fetch('https://mediumz-api.herokuapp.com/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({ query: query })
+        })
+
+        const jsonResponse = await response.json()
+
+        return { authors: jsonResponse.data.authors }
+    } catch (err) {
+        console.log("error")
+    }
+
 }
 
 
