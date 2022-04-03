@@ -153,7 +153,7 @@ const About: NextPage = ({ authors }: any) => {
 
                     <div className="grid grid-cols-3 gap-2 my-7 mobile:hidden">
                         {
-                            authors?.map((data: AuthorType, idx: any) =>
+                            authors?.filter((_: any, idx: any) => idx < 12).map((data: AuthorType, idx: any) =>
                                 <Writer key={idx} index={idx} name={data?.name} image={data?.image} />
                             )
                         }
@@ -161,7 +161,7 @@ const About: NextPage = ({ authors }: any) => {
 
                     <div className="mobile:grid grid-cols-1 hidden px-4 gap-2 my-3">
                         {
-                            authors?.filter((_: any, idx: any) => idx < 4 ).map((data: AuthorType, idx: any) =>
+                            authors?.filter((_: any, idx: any) => idx < 4).map((data: AuthorType, idx: any) =>
                                 <WriterMobile key={idx} index={idx} name={data?.name} image={data?.image} />
                             )
                         }
@@ -330,6 +330,7 @@ const About: NextPage = ({ authors }: any) => {
 
 About.getInitialProps = async () => {
 
+    let data = null
 
     const query = `
 {
@@ -352,7 +353,10 @@ About.getInitialProps = async () => {
 
         const jsonResponse = await response.json()
 
-        return { authors: jsonResponse.data.authors }
+        data = jsonResponse.data.authors
+
+        return { authors: data }
+
     } catch (err) {
         console.log("error")
     }

@@ -278,6 +278,7 @@ const Home: NextPage = ({ articles }: any) => {
 
 Home.getInitialProps = async () => {
 
+  let data = null
 
   const query = `
   {
@@ -308,10 +309,14 @@ Home.getInitialProps = async () => {
 
     const jsonResponse = await response.json()
 
-    return { articles: jsonResponse.data.articles }
+    data = jsonResponse.data.articles
+
+    return { articles: data }
+
   } catch (err) {
     console.log("error")
   }
+
 
 }
 

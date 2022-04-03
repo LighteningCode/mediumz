@@ -137,7 +137,7 @@ const Creators: NextPage = ({ authors }: any) => {
                         </div>
                         <div className="border-stone-800 w-1/2 mobile:w-full mobile:py-3 mobile:px-5 py-10 px-10">
                             {
-                                authors?.filter((_: any, idx: any) => idx < 6).map((data: AuthorType, idx: any) =>
+                                authors?.reverse().filter((_: any, idx: any) => idx < 6).map((data: AuthorType, idx: any) =>
                                     <Writer key={idx} index={idx} name={data?.name} image={data?.image} portfolio={data?.portfolio} />
                                 )
                             }
@@ -243,6 +243,7 @@ const Creators: NextPage = ({ authors }: any) => {
 
 Creators.getInitialProps = async () => {
 
+    let data = null;
 
     const query = `
     {
@@ -266,11 +267,13 @@ Creators.getInitialProps = async () => {
 
         const jsonResponse = await response.json()
 
-        return { authors: jsonResponse.data.authors }
+        data = jsonResponse.data.authors
+
+        return { authors: data }
+
     } catch (err) {
         console.log("error")
     }
-
 }
 
 
