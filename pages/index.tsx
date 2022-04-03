@@ -277,8 +277,7 @@ const Home: NextPage = ({ articles }: any) => {
   )
 }
 
-Home.getInitialProps = async () => {
-
+export async function getServerSideProps() {
   let data = null
 
   const query = `
@@ -312,7 +311,10 @@ Home.getInitialProps = async () => {
 
     data = jsonResponse.data.articles
 
-    return { articles: data }
+    return {
+      props: { articles: data }, // will be passed to the page component as props
+  }
+
 
   } catch (err) {
     console.log("error")
@@ -320,5 +322,6 @@ Home.getInitialProps = async () => {
 
 
 }
+
 
 export default Home

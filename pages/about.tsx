@@ -328,7 +328,7 @@ const About: NextPage = ({ authors }: any) => {
 }
 
 
-About.getInitialProps = async () => {
+export async function getServerSideProps() {
 
     let data = null
 
@@ -355,11 +355,14 @@ About.getInitialProps = async () => {
 
         data = jsonResponse.data.authors
 
-        return { authors: data }
+        return {
+            props: { authors: data }, // will be passed to the page component as props
+        }
 
     } catch (err) {
         console.log("error")
     }
+
 
 }
 

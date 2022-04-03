@@ -241,8 +241,7 @@ const Creators: NextPage = ({ authors }: any) => {
 }
 
 
-Creators.getInitialProps = async () => {
-
+export async function getServerSideProps() {
     let data = null;
 
     const query = `
@@ -269,7 +268,9 @@ Creators.getInitialProps = async () => {
 
         data = jsonResponse.data.authors
 
-        return { authors: data }
+        return {
+            props: { authors: data }, // will be passed to the page component as props
+        }
 
     } catch (err) {
         console.log("error")
