@@ -131,8 +131,8 @@ function ArticlePost({ authorName, title, date, time, authorImg, subTitle, mainT
 
         <div className="flex flex-row justify-between">
           <small className="text-sm text-stone-500">{date || "No Date"} · {time || 0} min read {mainTopic && <> · <TextPill text={mainTopic} /> </>}  </small>
-          <div className="flex flex-row">
-            <BookmarkOutline className="mx-1" />
+          <div className="flex flex-row cursor-pointer">
+            <BookmarkOutline className="mx-1 hover:text-gray-100" />
             <MoreHorizontalSvg className="mx-1 mobile:hidden" />
           </div>
         </div>
@@ -143,7 +143,25 @@ function ArticlePost({ authorName, title, date, time, authorImg, subTitle, mainT
     </div>
   )
 }
-const Home: NextPage = () => {
+
+type articlesType = {
+  title: any;
+  subTitle: any;
+  tags: any;
+  image: any;
+  readTime: any;
+  date: any;
+  author: {
+    name: any
+    image: any
+  }
+}
+
+interface articles {
+  articles: articlesType[]
+}
+
+const Home: NextPage = ({ articles }: any) => {
 
   const [atTop, setAtTop] = useState(true)
 
@@ -207,11 +225,21 @@ const Home: NextPage = () => {
 
       <main className="flex flex-row mobile:flex-col-reverse py-10">
         <div className="w-7/12 mobile:w-full mobile:px-5 px-16">
-          <ArticlePost />
-          <ArticlePost />
-          <ArticlePost />
-          <ArticlePost />
-          <ArticlePost />
+          {
+            articles?.map((data: articlesType) =>
+              <ArticlePost
+                title={data?.title}
+                date={data?.date}
+                subTitle={data?.subTitle}
+                time={data?.readTime}
+                authorName={data?.author?.name}
+                authorImg={data?.author?.image}
+                mainTopic={data?.tags[0] || null}
+                postImg={data?.image}
+              />
+            )
+          }
+
         </div>
         <div className="w-5/12 flex flex-col mobile:w-full mobile:px-0">
           <div className="flex flex-col px-20 sticky mobile:px-0 top-10">
@@ -246,6 +274,45 @@ const Home: NextPage = () => {
       </main>
     </div>
   )
+}
+
+Home.getInitialProps = async () => {
+
+
+  const query = `
+  {
+    articles{
+      title
+      subTitle 
+      tags
+      image
+      readTime
+      date
+      author{
+        name
+        image
+      }
+    }
+  }
+  `
+
+  try {
+    const response = await fetch('https://mediumz-api.herokuapp.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({ query: query })
+    })
+
+    const jsonResponse = await response.json()
+
+    return { articles: jsonResponse.data.articles }
+  } catch (err) {
+    console.log("error")
+  }
+
 }
 
 export default Home
