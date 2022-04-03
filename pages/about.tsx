@@ -11,23 +11,25 @@ import { useScrollPosition } from '../hooks/useScrollPosition';
 
 const Writer = ({ image, name, link, index, portfolio }: any) => {
     return (
-        <div className={`flex flex-row h-26 w-full mx-4 border-stone-800 ${[0, 1, 2].includes(index) ? "border-y" : "border-b"} py-2`}>
-            <Image src={image || "/placeholder.png"} className="object-cover rounded-full h-12 w-12" alt="Comma" width={30} height={30} />
+        <div className={`flex flex-row h-26 w-full mx-4 border-stone-800 ${[0, 1, 2].includes(index) ? "border-y" : "border-b"} py-4`}>
+            {/* <Image src={image || "/placeholder.png"} className="object-cover rounded-full h-12 w-12" alt="Comma" width={30} height={30} /> */}
+            <img src={image || "/placeholder.png"} className="object-cover rounded-full h-12 w-12" alt="Comma" width={20} height={20} />
             <div className="flex flex-col justify-center">
-                <span className="ml-5 text-xl capitalize">{name || "No Name"}</span>
-                <span className="ml-5 text-lg font-light uppercase">{portfolio || "No Portfolio"}</span>
+                <span className="ml-5 text-xl capitalize self-center">{name || "No Name"}</span>
+                {/* <span className="ml-5 text-lg font-light uppercase">{portfolio || "No Portfolio"}</span> */}
             </div>
         </div>
     )
 }
 
 const WriterMobile = ({ image, name, link, index, portfolio }: any) => {
+    console.log(image, "image")
     return (
-        <div className={`flex flex-row h-26 w-full px-4 border-stone-800 py-2 ${index === 0 ? "border-y" : "border-b"}  `}>
-            <Image src={image || "/placeholder.png"} className="object-cover rounded-full h-12 w-12" alt="Comma" width={30} height={30} />
+        <div className={`flex flex-row h-26 w-full px-4 border-stone-800 py-4 ${index === 0 ? "border-y" : "border-b"}  `}>
+            <img src={image || "/placeholder.png"} className="object-cover rounded-full h-12 w-12" alt="Comma" width={20} height={20} />
             <div className="flex flex-col justify-center">
-                <span className="ml-5 text-xl capitalize">{name || "No Name"}</span>
-                <span className="ml-5 text-lg font-light uppercase">{portfolio || "No Portfolio"}</span>
+                <span className="ml-5 text-xl capitalize self-center">{name || "No Name"}</span>
+                {/* <span className="ml-5 text-lg font-light uppercase">{portfolio || "No Portfolio"}</span> */}
             </div>
         </div>
     )
@@ -62,9 +64,12 @@ const Members = [
     },
 ]
 
+type AuthorType = {
+    name: any
+    image: any
+}
 
-
-const About: NextPage = () => {
+const About: NextPage = ({ authors }: any) => {
 
 
     const [selectedMemeber, setSelectedMemeber] = useState(0);
@@ -147,12 +152,19 @@ const About: NextPage = () => {
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 my-7 mobile:hidden">
-                        {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((value, idx) =>
-                            <Writer key={idx} index={idx} />)}
+                        {
+                            authors?.map((data: AuthorType, idx: any) =>
+                                <Writer key={idx} index={idx} name={data?.name} image={data?.image} />
+                            )
+                        }
                     </div>
+
                     <div className="mobile:grid grid-cols-1 hidden px-4 gap-2 my-3">
-                        {[0, 0, 0, 0].map((value, idx) =>
-                            <WriterMobile key={idx} index={idx} />)}
+                        {
+                            authors?.filter((_: any, idx: any) => idx < 4 ).map((data: AuthorType, idx: any) =>
+                                <WriterMobile key={idx} index={idx} name={data?.name} image={data?.image} />
+                            )
+                        }
                     </div>
                 </div>
 
@@ -247,10 +259,10 @@ const About: NextPage = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="flex flex-row bg-green-200 mobile:flex-col border-black pt-10">
                     <div className="w-1/2 mobile:w-full px-7">
-                        <h3 style={{lineHeight: 0.85}} className="text-8xl mobile:text-3xl mb-10">Take Medium with you.</h3>
+                        <h3 style={{ lineHeight: 0.85 }} className="text-8xl mobile:text-3xl mb-10">Take Medium with you.</h3>
                         <p className="font-medium my-8 text-md leading-6 self-center mb-10 mobile:pr-0 pr-48">Download our app so you can read, write, and publish wherever you are.</p>
                         <div className="flex-row flex justify-between pr-48 mobile:pr-5 mb-10">
                             <button className='mr-5 mobile:mr-2'>
@@ -313,6 +325,38 @@ const About: NextPage = () => {
             </main>
         </div>
     )
+}
+
+
+About.getInitialProps = async () => {
+
+
+    const query = `
+{
+    authors{
+      name
+      image
+    }
+  }
+    `
+
+    try {
+        const response = await fetch('https://mediumz-api.herokuapp.com/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({ query: query })
+        })
+
+        const jsonResponse = await response.json()
+
+        return { authors: jsonResponse.data.authors }
+    } catch (err) {
+        console.log("error")
+    }
+
 }
 
 export default About
