@@ -226,8 +226,9 @@ const Home: NextPage = ({ articles }: any) => {
       <main className="flex flex-row mobile:flex-col-reverse py-10">
         <div className="w-7/12 mobile:w-full mobile:px-5 px-16">
           {
-            articles?.map((data: articlesType) =>
+            articles?.map((data: articlesType, idx: number) =>
               <ArticlePost
+                key={idx}
                 title={data?.title}
                 date={data?.date}
                 subTitle={data?.subTitle}
