@@ -6,8 +6,9 @@ import TrendingSvg from '../assets/svg/trending';
 import MoreHorizontalSvg from '../assets/svg/more';
 import BookmarkOutline from '../assets/svg/bookmark-outline';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useScrollPosition } from '../hooks/useScrollPosition';
+import { useSession } from 'next-auth/react';
 
 
 const trending: TrendingItemProps[] = [
@@ -108,7 +109,7 @@ function TrendingItem({ number, name, title, date, time, image }: TrendingItemPr
 }
 
 const TextPill = ({ text }: { text: any }) => (
-  <span className="py-1.5 px-3 bg-stone-100 rounded-full text-stone-500 text-xs">{text}</span>
+  <span className="py-1.5 px-3 mobile:hidden mobile:py-1 bg-stone-100 rounded-full text-stone-500 text-xs">{text}</span>
 )
 
 const TextIdea = ({ text }: { text: any }) => (
@@ -117,7 +118,7 @@ const TextIdea = ({ text }: { text: any }) => (
 
 function ArticlePost({ authorName, title, date, time, authorImg, subTitle, mainTopic, postImg }: ArticlePostProps) {
   return (
-    <div className="w-full flex flex-row my-4">
+    <div className="w-full flex flex-row my-4 mobile:my-5">
       <div className="w-8/12 flex flex-col justify-center">
         <div className="flex flex-row mb-2 ">
           <div className="h-5 w-5 object-cover">
@@ -126,19 +127,19 @@ function ArticlePost({ authorName, title, date, time, authorImg, subTitle, mainT
           <span className='ml-2 text-xs self-center'>{authorName || "Nothing"}</span>
         </div>
 
-        <p className="m-0 text-xl font-semibold mb-1 text-stone-800">{title || "No Title"}</p>
-        <p className="m-0 text-sm text-gray-500 mb-3">{subTitle || " "}</p>
+        <p className="m-0 text-xl mobile:text-sm font-semibold mb-1 text-stone-800">{title || "No Title"}</p>
+        <p className="m-0 text-sm mobile:hidden text-gray-500 mb-3">{subTitle || " "}</p>
 
-        <div className="flex flex-row justify-between">
-          <small className="text-sm text-stone-500">{date || "No Date"} · {time || 0} min read {mainTopic && <> · <TextPill text={mainTopic} /> </>}  </small>
+        <div className="flex flex-row justify-between mobile:mt-2">
+          <small className="text-sm mobile:text-xs text-stone-500">{date || "No Date"} · {time || 0} min read {mainTopic && <> · <TextPill text={mainTopic} /> </>}  </small>
           <div className="flex flex-row cursor-pointer">
             <BookmarkOutline className="mx-1 hover:text-gray-100" />
             <MoreHorizontalSvg className="mx-1 mobile:hidden" />
           </div>
         </div>
       </div>
-      <div className="w-4/12 px-5">
-        <img src={postImg || "/placeholder.png"} className="object-cover w-full h-36" alt="Comma" />
+      <div className="w-4/12 px-5 mobile:px-1">
+        <img src={postImg || "/placeholder.png"} className="object-cover w-36 h-36 mobile:w-36 mobile:h-28" alt="Comma" />
       </div>
     </div>
   )
@@ -164,6 +165,14 @@ interface articles {
 const Home: NextPage = ({ articles }: any) => {
 
   const [atTop, setAtTop] = useState(true)
+
+  const { data: session } = useSession()
+
+  useEffect(() => {
+
+    console.log(session)
+
+  }, [session]);
 
   useScrollPosition(
     ({ currPos }: any) => {
@@ -313,7 +322,7 @@ export async function getServerSideProps() {
 
     return {
       props: { articles: data }, // will be passed to the page component as props
-  }
+    }
 
 
   } catch (err) {
