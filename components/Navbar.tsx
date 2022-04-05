@@ -1,7 +1,10 @@
+import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 
 
 export default function Navbar(props: any) {
+
+  const { data: session } = useSession()
 
   return (
     <nav className={`transition-all duration-300 ${props.className ? props.className : ""}`}>
@@ -15,7 +18,16 @@ export default function Navbar(props: any) {
             <li className="mx-3 font-normal self-center text-sm"><Link href="/about">Our story</Link></li>
             <li className="mx-3 font-normal self-center text-sm"><Link href="/membership">Membership</Link></li>
             <li className="mx-3 font-normal self-center text-sm"><Link href="/creators">Write</Link></li>
-            <li className="mx-3 font-normal self-center text-sm"><Link href="/signin">Sign In</Link></li>
+            {!session ?
+              <li onClick={() => signIn()} className="mx-3 font-normal self-center cursor-pointer text-sm">
+                {/* <Link href="/signin">Sign In</Link> */}
+                Sign In
+              </li>
+              :
+              <li onClick={() => signIn()} className="mx-3 font-normal self-center cursor-pointer text-sm">
+                <img src={session?.user?.image || ""} className="w-10 h-10 rounded-full" alt={session?.user?.name || ""} />
+              </li>
+            }
           </ul>
           <span className="px-4 py-2 bg-stone-900 cursor-pointer hover:bg-black rounded-full mobile:font-light text-sm font-normal ml-5 text-white">Get Started</span>
         </div>
@@ -25,7 +37,16 @@ export default function Navbar(props: any) {
         <li className="mx-3 font-normal self-center text-sm"><Link href="/about">Our story</Link></li>
         <li className="mx-3 font-normal self-center text-sm"><Link href="/membership">Membership</Link></li>
         <li className="mx-3 font-normal self-center text-sm"><Link href="/creators">Write</Link></li>
-        <li className="mx-3 font-normal self-center text-sm"><Link href="/signin">Sign In</Link></li>
+        {!session ?
+          <li onClick={() => signIn()} className="mx-3 font-normal self-center cursor-pointer text-sm">
+            {/* <Link href="/signin">Sign In</Link> */}
+            Sign In
+          </li>
+          :
+          <li onClick={() => signIn()} className="mx-3 font-normal self-center cursor-pointer text-sm">
+            <img src={session?.user?.image || ""} className="w-6 h-6 rounded-full" alt={session?.user?.name || ""} />
+          </li>
+        }
       </ul>
 
     </nav>
