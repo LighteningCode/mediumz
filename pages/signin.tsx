@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { Icon } from '@iconify/react';
-import { ClientSafeProvider, getProviders, LiteralUnion, signIn, useSession } from "next-auth/react"
+import { ClientSafeProvider, getProviders, LiteralUnion, signIn, signOut, useSession } from "next-auth/react"
 import { useRouter } from 'next/router';
 import { BuiltInProviderType } from 'next-auth/providers';
 
@@ -44,12 +44,18 @@ const SignIn: NextPage = ({ providers }: any) => {
                     {
                         session &&
                         <div className="flex flex-col my-10">
+                            <Button
+                                label="Sign Out"
+                                onClick={() => signOut()}
+                                icon={<Icon icon="eva:log-out-outline" fontSize={20} className="mr-2 my-1" />}
+                            />
                             <img src={session?.user?.image || ""} className="w-20 h-20 rounded-full self-center mb-5" alt={session?.user?.name || ""} />
                             <Button
                                 label="Go Back"
                                 onClick={() => push("/")}
                                 icon={<Icon icon="akar-icons:arrow-back-thick-fill" fontSize={20} className="mr-2 my-1" />}
                             />
+                            
                         </div>
                     }
 

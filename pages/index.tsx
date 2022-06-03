@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useScrollPosition } from '../hooks/useScrollPosition';
 import { useSession } from 'next-auth/react';
+import axios from "axios";
 
 
 const trending: TrendingItemProps[] = [

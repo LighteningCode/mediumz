@@ -1,10 +1,49 @@
-import { useSession, signIn, signOut } from "next-auth/react";
+import axios from "axios";
+import { useSession, signIn } from "next-auth/react";
 import Link from "next/link";
 
 
 export default function Navbar(props: any) {
 
   const { data: session } = useSession()
+
+
+  const submit = async () => {
+    // const payload = {
+    //   email: "elvisagbesi@gmail.com",
+    //   name: "SOme name",
+    //   image: "xxx",
+    // }
+
+    const payload = {
+      lastName: "balcmk",
+      otherNames: "Richard",
+      sex: "MALE",
+      availabile: true,
+      phone: "0236654654",
+      city: "xxx",
+      town: "xxx",
+      address: "xxx",
+      nearestLandmark: "xxx",
+      country: "xxx",
+      jerseySize: "xxx",
+      shortSize: "xxx",
+    }
+
+    // const payload = {
+    //   lastName: "balcmk",
+    //   otherNames: "Richard",
+    //   sex: "MALE",
+    //   availabile: true,
+    //   phone: "0236654654",
+    // }
+
+    axios.post(
+      "/api/player",
+      payload
+    )
+
+  }
 
   return (
     <nav className={`transition-all duration-300 ${props.className ? props.className : ""}`}>
@@ -29,7 +68,7 @@ export default function Navbar(props: any) {
               </li>
             }
           </ul>
-          <span className="px-4 py-2 bg-stone-900 cursor-pointer hover:bg-black rounded-full mobile:font-light text-sm font-normal ml-5 text-white">Get Started</span>
+          <span onClick={() => submit()} className="px-4 py-2 bg-stone-900 cursor-pointer hover:bg-black rounded-full mobile:font-light text-sm font-normal ml-5 text-white">Get Started</span>
         </div>
       </nav>
 
