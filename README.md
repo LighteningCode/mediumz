@@ -2,8 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Some new todo's
 
-- [ ] Add testimonials images to write and membership page
-- [ ] Add iconify package
+- [X] Add testimonials images to write and membership page
+- [X] Add iconify package
 
 ## Getting Started
 
