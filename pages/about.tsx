@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 import SupportWriters from '../assets/svg/support-writers';
 import UnlimitedReading from '../assets/svg/unlimited-reading';
 import { useScrollPosition } from '../hooks/useScrollPosition';
+import { API_URL } from '../constants';
 
 const Writer = ({ image, name, link, index, portfolio }: any) => {
     return (
@@ -342,7 +343,7 @@ export async function getServerSideProps() {
     `
 
     try {
-        const response = await fetch('https://mediumz-api.herokuapp.com/graphql', {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

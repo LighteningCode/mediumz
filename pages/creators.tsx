@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Transition } from '@headlessui/react';
 import { Icon } from '@iconify/react';
 import { useScrollPosition } from '../hooks/useScrollPosition';
+import { API_URL } from '../constants';
 
 const faqdata = [
     {
@@ -255,7 +256,7 @@ export async function getServerSideProps() {
     `
 
     try {
-        const response = await fetch('https://mediumz-api.herokuapp.com/graphql', {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

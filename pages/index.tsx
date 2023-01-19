@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useScrollPosition } from '../hooks/useScrollPosition';
 import { useSession } from 'next-auth/react';
-import axios from "axios";
+import { API_URL } from '../constants';
 
 
 const trending: TrendingItemProps[] = [
@@ -308,7 +308,7 @@ export async function getServerSideProps() {
   `
 
   try {
-    const response = await fetch('https://mediumz-api.herokuapp.com/graphql', {
+    const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
